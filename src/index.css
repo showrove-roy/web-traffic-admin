@@ -9,6 +9,12 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+.table :where(thead, tbody) :where(tr:not(:last-child)),
+.table :where(thead, tbody) :where(tr:first-child:last-child) {
+  border-bottom-width: 1px;
+  --tw-border-opacity: 1;
+  border-bottom-color: #00000033;
+}
 
 @layer components {
   .maxW1280 {
@@ -19,7 +25,7 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
   .footerBG {
-    background: url("./assets/footer-bg.svg"), #3391FF no-repeat center / cover;
+    background: url("./assets/footer-bg.svg"), #3391ff no-repeat center / cover;
   }
 
   .CMNSliderBG {

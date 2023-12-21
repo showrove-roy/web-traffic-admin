@@ -244,7 +244,7 @@ export const Main = () => {
       {/* sidebar and page */}
       <div className='drawer lg:drawer-open'>
         <input id='my-drawer-2' type='checkbox' className='drawer-toggle' />
-        <div className='drawer-content flex flex-col items-center justify-center'>
+        <div className='drawer-content xl:p-10 md:p-8 p-5'>
           {/* Page content here */}
           <Outlet></Outlet>
         </div>
@@ -256,6 +256,7 @@ export const Main = () => {
                 <img src={`${logo}`} alt='' />
               </Link>
             </div>
+            {/* Divider */}
             <div className='divider m-0 before:bg-[#D9D9D9] after:bg-[#D9D9D9] '></div>
             {/* Menu */}
             {Menu}

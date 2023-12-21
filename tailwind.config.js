@@ -8,7 +8,7 @@ export default {
       "black-10": "#262534",
       "black-100": "#263238",
       black: "#000000",
-      gray:"#0000000A"
+      gray:"#e8e8e8"
     },
     fontFamily: {
       sans: ["Poppins", "sans-serif"],
