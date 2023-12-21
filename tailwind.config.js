@@ -1,9 +1,21 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    colors: {
+      blue: "#3391FF",
+      white: "#ffffff",
+      "black-10": "#262534",
+      black: "#000000",
+    },
+    fontFamily: {
+      sans: ["Poppins", "sans-serif"],
+    },
     extend: {},
   },
-  plugins: [],
-}
-
+  daisyui: {
+    themes: [],
+  },
+  // eslint-disable-next-line no-undef
+  plugins: [require("daisyui")],
+};

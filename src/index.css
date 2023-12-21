@@ -1,68 +1,62 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer components {
+  .maxW1280 {
+    @apply max-w-7xl mx-auto w-full md:py-3 py-1 px-2 md:px-5;
   }
-  a:hover {
-    color: #747bff;
+  .heroBG {
+    background: url("./assets/pattern.png") no-repeat center center / cover;
   }
-  button {
-    background-color: #f9f9f9;
+
+  .footerBG {
+    background: url("./assets/footer-bg.svg"), #3391FF no-repeat center / cover;
+  }
+
+  .CMNSliderBG {
+    background: url("./assets/img-pattern.svg") no-repeat;
+  }
+  .btnShadow {
+    box-shadow: 0px 4px 50px 0px rgba(51, 145, 255, 0.5);
+  }
+  .serviceCardBg {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.04) 64.69%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+
+  .brandSectionBG {
+    background: url("./assets/img-pattern.svg"), no-repeat center center/cover;
+  }
+  .brandSectionBG2 {
+    background: url("./assets/pattern.png"), #3391ff no-repeat center / cover;
+  }
+  .aboutShadow {
+    box-shadow: 0px 4px 50px 0px rgba(255, 255, 255, 0.25);
+  }
+
+  .faqBG {
+    border-radius: 6.896px;
+    background: rgba(0, 0, 0, 0.06);
+  }
+
+  .getInTouchBg {
+    border-radius: 25px;
+    background: rgba(0, 0, 0, 0.04);
+  }
+  .formInputBox {
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.35);
   }
 }
