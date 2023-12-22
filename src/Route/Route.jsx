@@ -7,6 +7,7 @@ import { Home } from "../Page/Home/Home";
 import { Blog } from "../Page/Blog/Blog";
 import { AddFAQ } from "../Page/AddFAQ/AddFAQ";
 import { AddService } from "../Page/AddService/AddService";
+import { EditHeroSection } from "../Page/EditHeroSection/EditHeroSection";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: "/add-service",
         element: <AddService></AddService>,
+      },
+      {
+        path: "/edit-hero-section",
+        element: <EditHeroSection></EditHeroSection>,
       },
     ],
   },

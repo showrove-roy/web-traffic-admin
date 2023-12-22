@@ -1,20 +1,20 @@
-export const AddService = () => {
+export const EditHeroSection = () => {
   return (
     <div className='FormCardBG'>
-      <h5 className='fromTitle'>Add Service</h5>
+      <h5 className='fromTitle'>Edit Hero Section</h5>
 
       <div className=''>
         <form>
-          {/* Service Name */}
+          {/* Title */}
           <label className='form-control w-full'>
             <div className='label'>
               <span className='label-text text-lg font-medium'>
-                Service Name
+                Title
               </span>
             </div>
             <input
               type='text'
-              placeholder='Enter Service Name'
+              placeholder='Enter Title'
               className='input w-full formInputBox focus:outline-none focus:border-blue'
             />
           </label>
@@ -28,12 +28,12 @@ export const AddService = () => {
             </div>
             <textarea
               className='textarea min-h-28 formInputBox focus:outline-none focus:border-blue'
-              placeholder='Enter Service Description'></textarea>
+              placeholder='Enter Description'></textarea>
           </label>
-          {/* Icon */}
+          {/* Image */}
           <div className='form-control w-full mt-5'>
             <div className='label'>
-              <span className='label-text text-lg font-medium'>Icon</span>
+              <span className='label-text text-lg font-medium'>Image</span>
             </div>
             <input
               type='file'
