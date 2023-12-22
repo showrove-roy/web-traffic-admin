@@ -244,7 +244,7 @@ export const Main = () => {
       {/* sidebar and page */}
       <div className='drawer lg:drawer-open'>
         <input id='my-drawer-2' type='checkbox' className='drawer-toggle' />
-        <div className='drawer-content xl:p-10 md:p-8 p-5'>
+        <div className='drawer-content xl:p-10 md:p-8 p-5 bg-[#F2F2F2]'>
           {/* Page content here */}
           <Outlet></Outlet>
         </div>
