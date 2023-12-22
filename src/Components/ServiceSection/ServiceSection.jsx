@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { BlueButton } from "../../BlueButton/BlueButton";
-import DigitalMarketing from "../../../assets/Service Icon/Frame.svg";
+import DigitalMarketing from "../../assets/Service Icon/Frame.svg";
+import { BlueButton } from "../BlueButton/BlueButton";
+import { OutlineBtn } from "../OutlineBtn/OutlineBtn";
+
 
 export const ServiceSection = () => {
   return (
@@ -64,6 +66,10 @@ export const ServiceSection = () => {
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <div className="mt-5 flex justify-center">
+      <OutlineBtn btnLink={"hello"} btnText={"Load More"} />
       </div>
     </div>
   );

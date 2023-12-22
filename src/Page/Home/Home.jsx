@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { ServiceSection } from "../../Components/NavBar/ServiceSection/ServiceSection";
+
 import BlogThum from '../../assets/blog thum.svg';
+import { ServiceSection } from "../../Components/ServiceSection/ServiceSection";
 
 export const Home = () => {
   return (
