@@ -7,7 +7,7 @@ import { TitleSection } from "../TitleSection/TitleSection";
 export const ServiceSection = () => {
   return (
     <div className='CMNCardBG'>
-      <TitleSection title={"Add Service"} link={"hello"}/>
+      <TitleSection title={"Add Service"} link={"add-service"}/>
 
       {/* Data table */}
       <ServiceTable/>

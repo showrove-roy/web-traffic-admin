@@ -16,6 +16,18 @@ input[type="number"]::-webkit-outer-spin-button {
   border-bottom-color: #00000033;
 }
 
+input[type="file"]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.1);
+  color: #000;
+  cursor: pointer;
+}
+
 @layer components {
   .maxW1280 {
     @apply max-w-7xl mx-auto w-full md:py-3 py-1 px-2 md:px-5;

@@ -6,6 +6,7 @@ import { Main } from "../Layout/Main";
 import { Home } from "../Page/Home/Home";
 import { Blog } from "../Page/Blog/Blog";
 import { AddFAQ } from "../Page/AddFAQ/AddFAQ";
+import { AddService } from "../Page/AddService/AddService";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: "/add-faq",
         element: <AddFAQ></AddFAQ>,
+      },
+      {
+        path: "/add-service",
+        element: <AddService></AddService>,
       },
     ],
   },
