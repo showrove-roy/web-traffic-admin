@@ -95,7 +95,7 @@ export const Main = () => {
           className='py-[14px] px-12 text-blue border-2 font-medium border-blue rounded-full hover:btnShadow w-fit text-sm'>
           Log Out
         </Link>
-        <Link to='' className=''>
+        <Link to='/edit-profile' className=''>
           <FaRegCircleUser className='text-blue text-5xl' />
         </Link>
       </div>
@@ -227,7 +227,7 @@ export const Main = () => {
                     onClick={() => setShowNav(!true)}>
                     Log Out
                   </Link>
-                  <Link to='' className=''>
+                  <Link to='/edit-profile' className=''>
                     <FaRegCircleUser
                       className='text-blue text-5xl'
                       onClick={() => setShowNav(!true)}
