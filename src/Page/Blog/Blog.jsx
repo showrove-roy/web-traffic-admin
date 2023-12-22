@@ -6,8 +6,8 @@ export const Blog = () => {
     <div>
       <TitleSection title={"Add Blogs"} link={"add-blog"} />
 
-      <div className="mt-5">
-        <BlogCard/>
+      <div className='mt-5'>
+        <BlogCard />
       </div>
     </div>
   );
