@@ -20,47 +20,15 @@ input[type="number"]::-webkit-outer-spin-button {
   .maxW1280 {
     @apply max-w-7xl mx-auto w-full md:py-3 py-1 px-2 md:px-5;
   }
-  .heroBG {
-    background: url("./assets/pattern.png") no-repeat center center / cover;
-  }
 
-  .footerBG {
-    background: url("./assets/footer-bg.svg"), #3391ff no-repeat center / cover;
-  }
-
-  .CMNSliderBG {
-    background: url("./assets/img-pattern.svg") no-repeat;
-  }
   .btnShadow {
     box-shadow: 0px 4px 50px 0px rgba(51, 145, 255, 0.5);
   }
-  .serviceCardBg {
-    background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.04) 64.69%,
-      rgba(0, 0, 0, 0) 100%
-    );
+
+  .CMNCardBG {
+    @apply w-full min-h-80 bg-gray rounded-3xl py-7;
   }
 
-  .brandSectionBG {
-    background: url("./assets/img-pattern.svg"), no-repeat center center/cover;
-  }
-  .brandSectionBG2 {
-    background: url("./assets/pattern.png"), #3391ff no-repeat center / cover;
-  }
-  .aboutShadow {
-    box-shadow: 0px 4px 50px 0px rgba(255, 255, 255, 0.25);
-  }
-
-  .faqBG {
-    border-radius: 6.896px;
-    background: rgba(0, 0, 0, 0.06);
-  }
-
-  .getInTouchBg {
-    border-radius: 25px;
-    background: rgba(0, 0, 0, 0.04);
-  }
   .formInputBox {
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.35);
