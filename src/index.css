@@ -26,9 +26,20 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
   .CMNCardBG {
-    @apply w-full min-h-80 bg-gray rounded-3xl py-7;
+    @apply w-full min-h-80 bg-gray rounded-3xl lg:py-7 py-5;
   }
-
+  .FormCardBG {
+    @apply w-full min-h-80 bg-gray rounded-3xl lg:py-7 py-5 md:px-10 px-5;
+  }
+  .fromTitle {
+    @apply text-blue md:text-3xl text-xl font-medium mb-8;
+  }
+  .btnFill {
+    @apply bg-blue md:px-12 px-8 py-3 sm:text-base text-xs text-white font-medium rounded-3xl;
+  }
+  .btnOutline {
+    @apply border border-black-10 md:px-10 px-7 py-3 sm:text-base text-xs text-black-10 font-medium rounded-3xl;
+  }
   .formInputBox {
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.35);
