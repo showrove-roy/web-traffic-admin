@@ -1,4 +1,5 @@
 import { FAQSection } from "../../Components/FAQSection/FAQSection";
+import { ImageUpload } from "../../Components/ImageUpload/ImageUpload";
 import { ServiceSection } from "../../Components/ServiceSection/ServiceSection";
 import { SubServices } from "../../Components/SubServices/SubServices";
 
@@ -10,6 +11,7 @@ export const Home = () => {
       <FAQSection />
       <div className='my-10'></div>
       <SubServices />
+      <ImageUpload/>
     </>
   );
 };

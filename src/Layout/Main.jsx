@@ -4,6 +4,7 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
+import { Toaster } from "react-hot-toast";
 
 export const Main = () => {
   const [showNav, setShowNav] = useState(false);
@@ -263,6 +264,7 @@ export const Main = () => {
           </div>
         </div>
       </div>
+      <Toaster />
     </>
   );
 };
