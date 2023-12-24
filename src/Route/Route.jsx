@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
         element:<AddSubService></AddSubService>,
       },
       {
-        path: "/digital-marketing",
+        path: "/service/:id",
         element: <ServiceDetails></ServiceDetails>,
       },
     ],

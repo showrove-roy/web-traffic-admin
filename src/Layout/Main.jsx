@@ -5,85 +5,49 @@ import { useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import { Toaster } from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { Loading } from "../Components/Loading/Loading";
 
 export const Main = () => {
   const [showNav, setShowNav] = useState(false);
+
+  const { isLoading, data } = useQuery({
+    queryKey: ["allServices"],
+    queryFn: () => axios.get("/all-category", {}),
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  let services = data.data.data;
   const Menu = (
     <>
       <div className='px-8 py-5'>
         <ul className='menu p-0 m-0 text-xl font-medium text-black-100 '>
           <li>
-            <Link
-              to='/'
-              className='hover:text-blue'
-              onClick={() => setShowNav(!true)}>
+            <Link to='/' className='hover:text-blue'>
               Home
             </Link>
           </li>
           <li>
             <details>
-              <summary
-                className='hover:text-blue'
-                onClick={() => setShowNav(!true)}>
-                Services
-              </summary>
+              <summary className='hover:text-blue'>Services</summary>
               <ul className='text-base p-0'>
-                <li>
-                  <Link
-                    to='/digital-marketing'
-                    className='hover:text-blue'
-                    onClick={() => setShowNav(!true)}>
-                    Digital Marketing
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to='/'
-                    className='hover:text-blue'
-                    onClick={() => setShowNav(!true)}>
-                    Graphics Design
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to='/'
-                    className='hover:text-blue'
-                    onClick={() => setShowNav(!true)}>
-                    Content Marketing
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to='/'
-                    className='hover:text-blue'
-                    onClick={() => setShowNav(!true)}>
-                    Search Engine Opt...
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to='/'
-                    className='hover:text-blue'
-                    onClick={() => setShowNav(!true)}>
-                    Social Media Mark...
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to='/'
-                    className='hover:text-blue'
-                    onClick={() => setShowNav(!true)}>
-                    Web Design & Dev...
-                  </Link>
-                </li>
+                {services.map((service, i) => (
+                  <li key={i}>
+                    <Link to={`/service/${service?.id}`} className='hover:text-blue'>
+                      {service?.name.slice(0, 18)}
+                      {service?.name?.length >= 18 && "..."}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </details>
           </li>
           <li>
-            <Link
-              to='/blog'
-              className='hover:text-blue'
-              onClick={() => setShowNav(!true)}>
+            <Link to='/blog' className='hover:text-blue'>
               Blog
             </Link>
           </li>
@@ -159,54 +123,17 @@ export const Main = () => {
                       <details>
                         <summary className='hover:text-blue'>Services</summary>
                         <ul className='text-base p-0'>
-                          <li>
-                            <Link
-                              to='/digital-marketing'
-                              className='hover:text-blue'
-                              onClick={() => setShowNav(!true)}>
-                              Digital Marketing
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              to='/'
-                              className='hover:text-blue'
-                              onClick={() => setShowNav(!true)}>
-                              Graphics Design
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              to='/'
-                              className='hover:text-blue'
-                              onClick={() => setShowNav(!true)}>
-                              Content Marketing
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              to='/'
-                              className='hover:text-blue'
-                              onClick={() => setShowNav(!true)}>
-                              Search Engine Opt...
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              to='/'
-                              className='hover:text-blue'
-                              onClick={() => setShowNav(!true)}>
-                              Social Media Mark...
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              to='/'
-                              className='hover:text-blue'
-                              onClick={() => setShowNav(!true)}>
-                              Web Design & Dev...
-                            </Link>
-                          </li>
+                          {services.map((service, i) => (
+                            <li key={i}>
+                              <Link
+                                to='/digital-marketing'
+                                className='hover:text-blue'
+                                onClick={() => setShowNav(!true)}>
+                                {service?.name.slice(0, 18)}
+                                {service?.name?.length >= 18 && "..."}
+                              </Link>
+                            </li>
+                          ))}
                         </ul>
                       </details>
                     </li>
