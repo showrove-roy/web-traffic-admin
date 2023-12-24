@@ -30,7 +30,7 @@ export const Main = () => {
               <ul className='text-base p-0'>
                 <li>
                   <Link
-                    to='/'
+                    to='/digital-marketing'
                     className='hover:text-blue'
                     onClick={() => setShowNav(!true)}>
                     Digital Marketing
@@ -161,7 +161,7 @@ export const Main = () => {
                         <ul className='text-base p-0'>
                           <li>
                             <Link
-                              to='/'
+                              to='/digital-marketing'
                               className='hover:text-blue'
                               onClick={() => setShowNav(!true)}>
                               Digital Marketing
