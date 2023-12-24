@@ -19,7 +19,7 @@ export const ServiceSection = () => {
   console.log(data.data.data);
   return (
     <div className='CMNCardBG'>
-      <TitleSection title={"Add Service"} link={"add-service"} />
+      <TitleSection title={"Services"} link={"add-service"} />
 
       {/* Data table */}
       <ServiceTable services={services} refetch={refetch} isLoading={isLoading} />

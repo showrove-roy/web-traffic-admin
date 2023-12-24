@@ -12,6 +12,7 @@ import { EditProfile } from "../Page/EditProfile/EditProfile";
 import { AddBlog } from "../Page/AddBlog/AddBlog";
 import { TestComponent } from "../Components/TestComponent/TestComponent";
 import { ServiceDetails } from "../Components/ServiceDetails/ServiceDetails";
+import { AddSubService } from "../Components/AddSubService/AddSubService";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: "/edit-profile",
         element: <EditProfile></EditProfile>,
+      },
+      {
+        path: "/add-sub-service",
+        element:<AddSubService></AddSubService>,
       },
       {
         path: "/digital-marketing",

@@ -1,14 +1,13 @@
+import { BlogCard } from "../BlogCard/BlogCard";
 import { OutlineBtn } from "../OutlineBtn/OutlineBtn";
-import { SubServiceTable } from "../SubServiceTable/SubServiceTable";
 import { TitleSection } from "../TitleSection/TitleSection";
 
-export const SubServices = () => {
+export const BlogSection = () => {
   return (
     <div className='CMNCardBG'>
-      <TitleSection title={"Sub Service"} link={"add-sub-service"} />
+      <TitleSection title={"Featured Blogs"} link={"add-bog"} />
 
-      {/* data Table */}
-      <SubServiceTable />
+      <BlogCard />
 
       <div className='mt-5 flex justify-center'>
         <OutlineBtn btnLink={"hello"} btnText={"Load More"} />
