@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Loading } from "../../Components/Loading/Loading";
+import axios from "axios";
 
 export const AddService = () => {
   const [isUpdate, setIsUpdate] = useState(false);
@@ -20,7 +21,7 @@ export const AddService = () => {
 
   // handel Add Service
   const handelAddService = (data) => {
-    setIsUpdate(true)
+    setIsUpdate(true);
     formData.current = data;
     saveImage();
   };
@@ -59,27 +60,18 @@ export const AddService = () => {
       picture: url.current,
     };
 
-    fetch("https://web-traffic-six.vercel.app/api/v1/crete-category", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(service),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        
-        if (data.success) {
+    axios
+      .post("/crete-category", service)
+      .then((response) => {
+        if (response?.data?.success) {
           toast.success("Added Done");
           reset();
-          
         }
       })
       .catch((err) => console.error(err))
       .finally(() => {
         setIsUpdate(false);
       });
-
   };
   // loading statement
   if (isUpdate) {
