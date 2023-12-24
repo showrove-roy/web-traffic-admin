@@ -10,6 +10,7 @@ import { AddService } from "../Page/AddService/AddService";
 import { EditHeroSection } from "../Page/EditHeroSection/EditHeroSection";
 import { EditProfile } from "../Page/EditProfile/EditProfile";
 import { AddBlog } from "../Page/AddBlog/AddBlog";
+import { TestComponent } from "../Components/TestComponent/TestComponent";
 
 export const router = createBrowserRouter([
   {
@@ -50,5 +51,9 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login></Login>,
+  },
+  {
+    path: "/test",
+    element: <TestComponent></TestComponent>,
   },
 ]);
