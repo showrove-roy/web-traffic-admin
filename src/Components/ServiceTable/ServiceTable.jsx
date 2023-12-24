@@ -5,17 +5,20 @@ import { Loading } from "../Loading/Loading";
 export const ServiceTable = ({ services, refetch, isLoading }) => {
   // Service delete system
   const handelDelete = (id) => {
-    axios
-      .delete(`deleted-category/${id}`)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        refetch();
-      });
+    const conformation = window.confirm("Want to Delete?");
+    if (conformation) {
+      axios
+        .delete(`deleted-category/${id}`)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+        .finally(() => {
+          refetch();
+        });
+    }
   };
   if (isLoading) {
     return <Loading />;
@@ -34,13 +37,13 @@ export const ServiceTable = ({ services, refetch, isLoading }) => {
           </tr>
         </thead>
         <tbody>
-          {services.map((service,i) => (
+          {services.map((service, i) => (
             <tr key={service?.id}>
-              <th>{i+1}</th>
+              <th>{i + 1}</th>
               <td>{service?.name}</td>
-              <td>{service?.descripton}</td>
+              <td>{service?.descripton.slice(0,30)}....</td>
               <td>
-                <img src={`${service?.picture}`} alt='' className='w-12' />
+                <img src={`${service?.picture}`} alt='' className='w-10' />
               </td>
               <td className='flex gap-2'>
                 <Link
