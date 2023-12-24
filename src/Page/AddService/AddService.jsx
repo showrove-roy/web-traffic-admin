@@ -1,7 +1,16 @@
-import { useForm } from "react-hook-form"
-
+/* eslint-disable no-empty */
+import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { Loading } from "../../Components/Loading/Loading";
 
 export const AddService = () => {
+  const [isUpdate, setIsUpdate] = useState(false);
+  // image store state
+  const [image, setImage] = useState(null);
+  const url = useRef("");
+  const formData = useRef("");
+  // form Hook
   const {
     register,
     formState: { errors },
@@ -10,8 +19,71 @@ export const AddService = () => {
   } = useForm();
 
   // handel Add Service
-  const handelAddService=(data)=>{
-    console.log(data);
+  const handelAddService = (data) => {
+    setIsUpdate(true)
+    formData.current = data;
+    saveImage();
+  };
+
+  // image upload system
+  const saveImage = async () => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "myCloud");
+    data.append("cloud_name", "dldccdcyb");
+
+    try {
+      if (image === null) {
+        return toast.error("Please Upload image");
+      }
+
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dldccdcyb/image/upload",
+        {
+          method: "POST",
+          body: data,
+        }
+      );
+
+      const cloudData = await res.json();
+      url.current = cloudData.url;
+      handelAddServiceDB();
+    } catch (error) {}
+  };
+
+  // update to database
+  const handelAddServiceDB = () => {
+    const service = {
+      name: formData.current.service_name,
+      descripton: formData.current.service_description,
+      picture: url.current,
+    };
+
+    fetch("https://web-traffic-six.vercel.app/api/v1/crete-category", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(service),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        
+        if (data.success) {
+          toast.success("Added Done");
+          reset();
+          
+        }
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {
+        setIsUpdate(false);
+      });
+
+  };
+  // loading statement
+  if (isUpdate) {
+    return <Loading></Loading>;
   }
   return (
     <div className='FormCardBG'>
@@ -33,7 +105,6 @@ export const AddService = () => {
               {...register("service_name", {
                 required: "Must Need Service Name",
               })}
-              
             />
             {errors.service_name && (
               <p className='text-red mt-1' role='alert'>
@@ -51,10 +122,11 @@ export const AddService = () => {
             </div>
             <textarea
               className='textarea min-h-28 formInputBox focus:outline-none focus:border-blue'
-              placeholder='Enter Service Description' {...register("service_description", {
+              placeholder='Enter Service Description'
+              {...register("service_description", {
                 required: "Must Need Service Description",
               })}></textarea>
-              {errors.service_description && (
+            {errors.service_description && (
               <p className='text-red mt-1' role='alert'>
                 {errors.service_description?.message}
               </p>
@@ -66,14 +138,22 @@ export const AddService = () => {
               <span className='label-text text-lg font-medium'>Icon</span>
             </div>
             <input
+              id='file-upload'
               type='file'
+              accept='image/*'
               className='w-full formInputBox focus:outline-none focus:border-blue cursor-pointer'
+              onChange={(e) => setImage(e.target.files[0])}
+              required
             />
           </div>
 
           <div className='mt-5 flex gap-5'>
-            <button type="submit" className='btnFill'>SAVE</button>
-            <button onClick={()=>reset()} className='btnOutline'>CANCEL</button>
+            <button type='submit' className='btnFill'>
+              SAVE
+            </button>
+            <button type='reset' className='btnOutline'>
+              CANCEL
+            </button>
           </div>
         </form>
       </div>

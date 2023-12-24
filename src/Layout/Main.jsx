@@ -264,7 +264,12 @@ export const Main = () => {
           </div>
         </div>
       </div>
-      <Toaster />
+      {/* Notification toaster */}
+      <Toaster
+        toastOptions={{
+          duration: 5000,
+        }}
+      />
     </>
   );
 };
