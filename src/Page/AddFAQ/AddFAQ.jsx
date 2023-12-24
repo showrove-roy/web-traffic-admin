@@ -1,4 +1,8 @@
+import { useParams } from "react-router-dom";
+
 export const AddFAQ = () => {
+  let  serviceID  = useParams();
+
   return (
     <div className='FormCardBG'>
       <h5 className='fromTitle'>

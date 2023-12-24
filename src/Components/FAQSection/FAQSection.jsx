@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 import { FAQTable } from "../FAQTable/FAQTable";
 import { OutlineBtn } from "../OutlineBtn/OutlineBtn";
 import { TitleSection } from "../TitleSection/TitleSection";
 
-export const FAQSection = () => {
+export const FAQSection = ({id}) => {
   return (
     <div className='CMNCardBG'>
-      <TitleSection title={"Add FAQ"} link={"add-faq"} />
+      <TitleSection title={"Add FAQ"} link={`add-faq/${id}`} />
 
       {/* data Table */}
       <FAQTable />

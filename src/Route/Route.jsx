@@ -13,6 +13,7 @@ import { AddBlog } from "../Page/AddBlog/AddBlog";
 import { TestComponent } from "../Components/TestComponent/TestComponent";
 import { ServiceDetails } from "../Components/ServiceDetails/ServiceDetails";
 import { AddSubService } from "../Components/AddSubService/AddSubService";
+import axios from "axios";
 
 export const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ export const router = createBrowserRouter([
         element: <AddBlog></AddBlog>,
       },
       {
-        path: "/add-faq",
+        path: "/add-faq/:id",
         element: <AddFAQ></AddFAQ>,
       },
       {
@@ -50,10 +51,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/add-sub-service",
-        element:<AddSubService></AddSubService>,
+        element: <AddSubService></AddSubService>,
       },
       {
         path: "/service/:id",
+        loader: ({ params }) => axios.get(`/single-category/${params.id}`),
         element: <ServiceDetails></ServiceDetails>,
       },
     ],
