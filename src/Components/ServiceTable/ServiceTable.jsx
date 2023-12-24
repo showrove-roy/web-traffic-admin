@@ -1,6 +1,25 @@
+/* eslint-disable react/prop-types */
+import axios from "axios";
 import { Link } from "react-router-dom";
-import DigitalMarketing from "../../assets/Service Icon/Frame.svg";
-export const ServiceTable = () => {
+import { Loading } from "../Loading/Loading";
+export const ServiceTable = ({ services, refetch, isLoading }) => {
+  // Service delete system
+  const handelDelete = (id) => {
+    axios
+      .delete(`deleted-category/${id}`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        refetch();
+      });
+  };
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className='overflow-x-auto'>
       <table className='table lg:text-base text-black-100'>
@@ -15,44 +34,28 @@ export const ServiceTable = () => {
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
-          <tr>
-            <th>1</th>
-            <td>Digital Marketing</td>
-            <td>Digital marketing creates...</td>
-            <td>
-              <img src={`${DigitalMarketing}`} alt='' />
-            </td>
-            <td className='flex gap-2'>
-              <Link
-                to='/'
-                className='px-6 py-1 bg-[#CCFBF1]  text-[#4ea094] font-medium border border-[#CCFBF1] hover:border-[#4ea094]'>
-                Edit
-              </Link>
-              <button className='px-6 py-1 bg-[#FFE4E6]  text-[#E36A98] font-medium border border-[#FFE4E6] hover:border-[#E36A98]'>
-                Delete
-              </button>
-            </td>
-          </tr>
-          {/* row 2 */}
-          <tr>
-            <th>2</th>
-            <td>Graphics Design</td>
-            <td>Digital marketing creates...</td>
-            <td>
-              <img src={`${DigitalMarketing}`} alt='' />
-            </td>
-            <td className='flex gap-2'>
-              <Link
-                to='/'
-                className='px-6 py-1 bg-[#CCFBF1]  text-[#4ea094] font-medium border border-[#CCFBF1] hover:border-[#4ea094]'>
-                Edit
-              </Link>
-              <button className='px-6 py-1 bg-[#FFE4E6]  text-[#E36A98] font-medium border border-[#FFE4E6] hover:border-[#E36A98]'>
-                Delete
-              </button>
-            </td>
-          </tr>
+          {services.map((service,i) => (
+            <tr key={service?.id}>
+              <th>{i+1}</th>
+              <td>{service?.name}</td>
+              <td>{service?.descripton}</td>
+              <td>
+                <img src={`${service?.picture}`} alt='' className='w-12' />
+              </td>
+              <td className='flex gap-2'>
+                <Link
+                  to='/'
+                  className='px-6 py-1 bg-[#CCFBF1]  text-[#4ea094] font-medium border border-[#CCFBF1] hover:border-[#4ea094]'>
+                  Edit
+                </Link>
+                <button
+                  onClick={() => handelDelete(service?.id)}
+                  className='px-6 py-1 bg-[#FFE4E6]  text-[#E36A98] font-medium border border-[#FFE4E6] hover:border-[#E36A98]'>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
