@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 
-export const FAQTable = () => {
+export const FAQTable = ({faqs}) => {
   return (
     <div className='overflow-x-auto'>
       <table className='table lg:text-base text-black-100'>
@@ -9,14 +10,15 @@ export const FAQTable = () => {
           <tr className='text-[#00000099] lg:text-base font-medium'>
             <th className='font-semibold'>No.</th>
             <th className='font-semibold'>FAQ</th>
+            <th className='font-semibold'>Answer</th>
             <th className='font-semibold'>Action</th>
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
-          <tr>
-            <th>1</th>
-            <td>For Example: This is a random Demo question ?</td>
+          {faqs.map((faq,i)=><tr key={i}>
+            <th>{i+1}</th>
+            <td>{faq?.Question}</td>
+            <td>{faq?.Answer.slice(0,30)}....</td>
             <td className='flex gap-2'>
               <Link
                 to='/'
@@ -27,8 +29,9 @@ export const FAQTable = () => {
                 Delete
               </button>
             </td>
-          </tr>
-          {/* row 2 */}
+          </tr>)}
+          
+         
         </tbody>
       </table>
     </div>

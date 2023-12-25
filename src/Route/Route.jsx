@@ -35,6 +35,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/add-faq/:id",
+        loader: ({ params }) => axios.get(`/single-category/${params.id}`),
         element: <AddFAQ></AddFAQ>,
       },
       {

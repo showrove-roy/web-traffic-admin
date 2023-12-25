@@ -6,13 +6,9 @@ import { SubServices } from "../SubServices/SubServices";
 
 export const ServiceDetails = () => {
   const data = useLoaderData();
-  console.log("🚀 ~ file: ServiceDetails.jsx:9 ~ ServiceDetails ~ data:", data)
 
-
-  let service = {
-    id: data?.data?.data?.id,
-    name: data?.data?.data?.name,
-  };
+  let service = data?.data?.data;
+  console.log(service);
 
   return (
     <section className=''>
@@ -23,7 +19,7 @@ export const ServiceDetails = () => {
       <div className='my-10'></div>
       <SubServices></SubServices>
       <div className='my-10'></div>
-      <FAQSection id={service?.id}></FAQSection>
+      <FAQSection id={service?.id} faqs={service?.CatagoryFaq}></FAQSection>
       <div className='my-10'></div>
       <BlogSection></BlogSection>
     </section>

@@ -6,6 +6,7 @@ import { Loading } from "../../Components/Loading/Loading";
 import axios from "axios";
 
 export const AddService = () => {
+  // Loading statement
   const [isUpdate, setIsUpdate] = useState(false);
   // image store state
   const [image, setImage] = useState(null);
