@@ -5,7 +5,7 @@ import { TitleSection } from "../TitleSection/TitleSection";
 export const BlogSection = () => {
   return (
     <div className='CMNCardBG'>
-      <TitleSection title={"Featured Blogs"} link={"add-bog"} />
+      <TitleSection title={"Featured Blogs"} link={"add-blog"} />
 
       <BlogCard />
 
