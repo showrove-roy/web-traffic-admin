@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import { Error404 } from "../Page/Error404/Error404";
 import { Login } from "../Page/Login/Login";
 import { Main } from "../Layout/Main";
@@ -51,7 +50,7 @@ export const router = createBrowserRouter([
         element: <EditProfile></EditProfile>,
       },
       {
-        path: "/add-sub-service",
+        path: "/add-sub-service/:id",
         element: <AddSubService></AddSubService>,
       },
       {

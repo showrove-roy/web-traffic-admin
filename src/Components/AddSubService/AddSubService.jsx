@@ -4,7 +4,10 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Loading } from "../../Components/Loading/Loading";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 export const AddSubService = () => {
+  const { id } = useParams();
+  // Loading statement
   const [isUpdate, setIsUpdate] = useState(false);
   // image store state
   const [image, setImage] = useState(null);
@@ -19,12 +22,10 @@ export const AddSubService = () => {
   } = useForm();
 
   // handel Add Service
-  const handelAddService = (data) => {
-    console.log(data);
-    return;
-    // setIsUpdate(true);
-    // formData.current = data;
-    // saveImage();
+  const handelAddSubService = (data) => {
+    setIsUpdate(true);
+    formData.current = data;
+    saveImage();
   };
 
   // image upload system
@@ -49,20 +50,21 @@ export const AddSubService = () => {
 
       const cloudData = await res.json();
       url.current = cloudData.url;
-      handelAddServiceDB();
+      handelAddSubServiceDB();
     } catch (error) {}
   };
 
   // update to database
-  const handelAddServiceDB = () => {
-    const service = {
+  const handelAddSubServiceDB = () => {
+    const subService = {
       name: formData.current.subService_name,
-      descripton: formData.current.service_description,
+      descripton: formData.current.subService_description,
       picture: url.current,
+      catagoryId: id,
     };
 
     axios
-      .post("/crete-category", service)
+      .post("/crete-subcategory", subService)
       .then((response) => {
         if (response?.data?.success) {
           toast.success("Added Done");
@@ -83,28 +85,12 @@ export const AddSubService = () => {
       <h5 className='fromTitle'>Add Sub Service</h5>
 
       <div className=''>
-        <form onSubmit={handleSubmit(handelAddService)}>
-          {/* Select Service Name */}
+        <form onSubmit={handleSubmit(handelAddSubService)}>
+          {/* Service Name */}
           <label className='form-control w-full'>
             <div className='label'>
               <span className='label-text text-lg font-medium'>
-                Select Service
-              </span>
-            </div>
-            <select className='select w-full formInputBox focus:outline-none focus:border-blue' {...register("service_name", {
-                required: "Must Need to select Service Name",
-              })}>
-              <option value=''>
-                Pick your Service Name
-              </option>
-              
-            </select>
-          </label>
-          {/* Sub Service Name */}
-          <label className='form-control w-full mt-5'>
-            <div className='label'>
-              <span className='label-text text-lg font-medium'>
-               Sub-Service Name
+                Service Name
               </span>
             </div>
             <input
@@ -112,7 +98,7 @@ export const AddSubService = () => {
               placeholder='Enter Service Name'
               className='input w-full formInputBox focus:outline-none focus:border-blue'
               {...register("subService_name", {
-                required: "Must Need Sub Service Name",
+                required: "Must Need Service Name",
               })}
             />
             {errors.subService_name && (
@@ -122,11 +108,11 @@ export const AddSubService = () => {
             )}
           </label>
 
-          {/*Sub-Service Description */}
+          {/*Description */}
           <label className='form-control mt-5'>
             <div className='label'>
               <span className='label-text text-lg font-medium'>
-              Sub-Service Description
+                Description
               </span>
             </div>
             <textarea
