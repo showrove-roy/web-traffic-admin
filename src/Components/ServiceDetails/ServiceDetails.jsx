@@ -14,9 +14,8 @@ export const ServiceDetails = () => {
     queryFn: () => axios.get(`/single-category/${id}`, {}),
   });
   let service = data?.data?.data;
-  console.log("🚀 ~ file: ServiceDetails.jsx:18 ~ ServiceDetails ~ service:", service)
+  console.log("🚀 ~:", service);
 
-  
   if (isLoading) {
     return <Loading />;
   }
@@ -29,7 +28,10 @@ export const ServiceDetails = () => {
       <div className='my-10'></div>
       <SubServices></SubServices>
       <div className='my-10'></div>
-      <FAQSection id={service?.id} faqs={service?.CatagoryFaq} refetch={refetch}></FAQSection>
+      <FAQSection
+        id={service?.id}
+        faqs={service?.CatagoryFaq}
+        refetch={refetch}></FAQSection>
       <div className='my-10'></div>
       <BlogSection></BlogSection>
     </section>
