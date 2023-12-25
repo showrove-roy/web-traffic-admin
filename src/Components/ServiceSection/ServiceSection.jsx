@@ -6,7 +6,7 @@ import axios from "axios";
 import { Loading } from "../Loading/Loading";
 
 export const ServiceSection = () => {
-  const { isLoading, data,refetch } = useQuery({
+  const { isLoading, data, refetch } = useQuery({
     queryKey: ["allServices"],
     queryFn: () => axios.get("/all-category", {}),
   });
@@ -15,14 +15,20 @@ export const ServiceSection = () => {
     return <Loading />;
   }
 
-  let services=data.data.data;
-  
+  let services = data.data.data;
+
+ 
+
   return (
     <div className='CMNCardBG'>
       <TitleSection title={"Services"} link={"add-service"} />
 
       {/* Data table */}
-      <ServiceTable services={services} refetch={refetch} isLoading={isLoading} />
+      <ServiceTable
+        services={services}
+        refetch={refetch}
+        isLoading={isLoading}
+      />
 
       <div className='mt-5 flex justify-center'>
         <OutlineBtn btnLink={"hello"} btnText={"Load More"} />
