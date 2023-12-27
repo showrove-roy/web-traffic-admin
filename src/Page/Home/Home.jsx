@@ -1,5 +1,6 @@
 
 import { ServiceSection } from "../../Components/ServiceSection/ServiceSection";
+import { Blog } from "../Blog/Blog";
 
 
 export const Home = () => {
@@ -7,7 +8,7 @@ export const Home = () => {
     <>
       <ServiceSection />
       <div className='my-10'></div>
-      
+      <Blog/>
     </>
   );
 };
