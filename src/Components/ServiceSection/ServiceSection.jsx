@@ -17,8 +17,6 @@ export const ServiceSection = () => {
 
   let services = data.data.data;
 
- 
-
   return (
     <div className='CMNCardBG'>
       <TitleSection title={"Services"} link={"add-service"} />

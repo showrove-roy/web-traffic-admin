@@ -14,7 +14,7 @@ export const ServiceDetails = () => {
     queryFn: () => axios.get(`/single-category/${id}`, {}),
   });
   let service = data?.data?.data;
-  console.log("🚀 ~:", service);
+
 
   if (isLoading) {
     return <Loading />;
@@ -24,21 +24,24 @@ export const ServiceDetails = () => {
       <div className='mb-10'>
         <h2 className='text-center text-4xl font-medium'>{service?.name}</h2>
       </div>
-    <EditHeroSection service={service}></EditHeroSection>
+      <EditHeroSection service={service}></EditHeroSection>
       <div className='my-10'></div>
       <SubServices
         id={service?.id}
         subService={service?.SubCatagory}
         refetch={refetch}
-        isLoading={isLoading}
-        ></SubServices>
+        isLoading={isLoading}></SubServices>
       <div className='my-10'></div>
       <FAQSection
         id={service?.id}
         faqs={service?.CatagoryFaq}
         refetch={refetch}></FAQSection>
       <div className='my-10'></div>
-      <BlogSection></BlogSection>
+      <BlogSection
+        id={service?.id}
+        CatagoryBlogs={service?.CatagoryBlogs}
+        refetch={refetch}
+        isLoading={isLoading}></BlogSection>
     </section>
   );
 };

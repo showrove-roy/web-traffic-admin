@@ -11,20 +11,24 @@ export const Blog = () => {
   });
 
   if (isLoading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   let allBlogs = data.data.data;
- 
+
   return (
     <div>
       <TitleSection title={"Add Blogs"} link={"add-blog"} />
 
       <div className='mt-5'>
-        {
-          allBlogs.map((blog)=><BlogCard key={blog.id} blog={blog} refetch={refetch} isLoading={isLoading} />)
-        }
-        
+        {allBlogs.map((blog) => (
+          <BlogCard
+            key={blog.id}
+            blog={blog}
+            refetch={refetch}
+            isLoading={isLoading}
+          />
+        ))}
       </div>
     </div>
   );

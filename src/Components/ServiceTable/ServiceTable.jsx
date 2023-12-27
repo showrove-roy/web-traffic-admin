@@ -9,8 +9,8 @@ export const ServiceTable = ({ services, refetch, isLoading }) => {
     if (conformation) {
       axios
         .delete(`deleted-category/${id}`)
-        .then((response) => {
-          console.log(response);
+        .then(() => {
+         
         })
         .catch((error) => {
           console.error(error);
