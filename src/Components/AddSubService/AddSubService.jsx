@@ -4,9 +4,14 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Loading } from "../../Components/Loading/Loading";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useLoaderData} from "react-router-dom";
 export const AddSubService = () => {
-  const { id } = useParams();
+  const data = useLoaderData();
+
+  let service = {
+    id: data?.data?.data?.id,
+    name: data?.data?.data?.name,
+  };
   // Loading statement
   const [isUpdate, setIsUpdate] = useState(false);
   // image store state
@@ -23,6 +28,7 @@ export const AddSubService = () => {
 
   // handel Add Service
   const handelAddSubService = (data) => {
+    console.log("🚀 ~ file: AddSubService.jsx:31 ~ handelAddSubService ~ data:", data)
     setIsUpdate(true);
     formData.current = data;
     saveImage();
@@ -60,8 +66,10 @@ export const AddSubService = () => {
       name: formData.current.subService_name,
       descripton: formData.current.subService_description,
       picture: url.current,
-      catagoryId: id,
+      catagoryId: service.id,
     };
+
+    console.log(subService);
 
     axios
       .post("/crete-subcategory", subService)
@@ -82,7 +90,7 @@ export const AddSubService = () => {
   }
   return (
     <div className='FormCardBG'>
-      <h5 className='fromTitle'>Add Sub Service</h5>
+      <h5 className='fromTitle'>Add Sub Service for {service?.name}</h5>
 
       <div className=''>
         <form onSubmit={handleSubmit(handelAddSubService)}>

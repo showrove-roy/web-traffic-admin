@@ -51,6 +51,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/add-sub-service/:id",
+        loader: ({ params }) => axios.get(`/single-category/${params.id}`),
         element: <AddSubService></AddSubService>,
       },
       {

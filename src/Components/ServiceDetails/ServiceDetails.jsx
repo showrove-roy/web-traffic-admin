@@ -26,9 +26,12 @@ export const ServiceDetails = () => {
       </div>
       <EditHeroSection></EditHeroSection>
       <div className='my-10'></div>
-      <SubServices  id={service?.id}
+      <SubServices
+        id={service?.id}
         subService={service?.SubCatagory}
-        refetch={refetch}></SubServices>
+        refetch={refetch}
+        isLoading={isLoading}
+        ></SubServices>
       <div className='my-10'></div>
       <FAQSection
         id={service?.id}
