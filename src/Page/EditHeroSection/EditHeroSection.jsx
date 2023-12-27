@@ -60,6 +60,7 @@ export const EditHeroSection = ({ service }) => {
       title: formData.current.title,
       descripton: formData.current.banner_description,
       picture: url.current,
+      catagoryId: service?.id,
     };
 
     console.log(banner);
@@ -95,8 +96,7 @@ export const EditHeroSection = ({ service }) => {
             <input
               type='text'
               placeholder='Enter Title'
-              value={service?.name}
-              disabled
+              defaultValue={service?.name}
               className='input w-full formInputBox focus:outline-none focus:border-blue'
               {...register("title", {
                 required: "Must Need Title",

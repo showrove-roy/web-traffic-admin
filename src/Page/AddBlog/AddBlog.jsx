@@ -1,13 +1,95 @@
+/* eslint-disable no-empty */
+import { useForm } from "react-hook-form";
 import { BlogDescription } from "../../Components/BlogDescription/BlogDescription";
+import { useRef, useState } from "react";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { Loading } from "../../Components/Loading/Loading";
 
 export const AddBlog = () => {
+  // set Description
+  const [value, setValue] = useState("");
+    // Loading statement
+    const [isUpdate, setIsUpdate] = useState(false);
+    // image store state
+    const [image, setImage] = useState(null);
+    const url = useRef("");
+    const formData = useRef("");
+
+  // form Hook
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm();
+
+  // handel Add Blog
+  const handelAddBlog = (data) => {
+    
+    setIsUpdate(true);
+    formData.current = data;
+    saveImage();
+  };
+
+  // image upload system
+  const saveImage = async () => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "myCloud");
+    data.append("cloud_name", "dldccdcyb");
+
+    try {
+      if (image === null) {
+        return toast.error("Please Upload image");
+      }
+
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dldccdcyb/image/upload",
+        {
+          method: "POST",
+          body: data,
+        }
+      );
+
+      const cloudData = await res.json();
+      url.current = cloudData.url;
+      handelAddBlogDB();
+    } catch (error) {}
+  };
+
+  // update to database
+  const handelAddBlogDB = () => {
+    const blog = {
+      title: formData.current.title,
+      descripton: value,
+      picture: url.current,
+    };
+console.log(blog);
+    axios
+      .post("/crete-blog", blog)
+      .then((response) => {
+        if (response?.data?.success) {
+          toast.success("Added Done");
+          reset();
+        }
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {
+        setIsUpdate(false);
+      });
+  };
+  // loading statement
+  if (isUpdate) {
+    return <Loading></Loading>;
+  }
   return (
     <>
       <div className='FormCardBG'>
         <h5 className='fromTitle'>Blog Info</h5>
 
         <div className=''>
-          <form>
+          <form onSubmit={handleSubmit(handelAddBlog)}>
             {/* Title */}
             <label className='form-control w-full'>
               <div className='label'>
@@ -17,19 +99,15 @@ export const AddBlog = () => {
                 type='text'
                 placeholder='Enter Blog Title'
                 className='input w-full formInputBox focus:outline-none focus:border-blue'
+                {...register("title", {
+                  required: "Must Need A Title",
+                })}
               />
-            </label>
-
-            {/* URL */}
-            <label className='form-control w-full mt-5'>
-              <div className='label'>
-                <span className='label-text text-lg font-medium'>URL</span>
-              </div>
-              <input
-                type='url'
-                placeholder='Enter Blog URL'
-                className='input w-full formInputBox focus:outline-none focus:border-blue'
-              />
+              {errors.title && (
+                <p className='text-red mt-1' role='alert'>
+                  {errors.title?.message}
+                </p>
+              )}
             </label>
 
             {/* Featured Image */}
@@ -40,20 +118,26 @@ export const AddBlog = () => {
                 </span>
               </div>
               <input
-                type='file'
-                className='w-full formInputBox focus:outline-none focus:border-blue cursor-pointer'
-              />
+              id='file-upload'
+              type='file'
+              accept='image/*'
+              className='w-full formInputBox focus:outline-none focus:border-blue cursor-pointer'
+              onChange={(e) => setImage(e.target.files[0])}
+              required
+            />
             </div>
 
+            <BlogDescription value={value} setValue={setValue} />
+
             <div className='mt-5 flex gap-5'>
-              <button className='btnFill'>SAVE</button>
+              <button type='submit' className='btnFill'>
+                SAVE
+              </button>
               <button className='btnOutline'>CANCEL</button>
             </div>
           </form>
         </div>
       </div>
-
-      <BlogDescription />
     </>
   );
 };
