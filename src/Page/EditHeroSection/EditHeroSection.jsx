@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-empty */
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -5,7 +6,7 @@ import toast from "react-hot-toast";
 import { Loading } from "../../Components/Loading/Loading";
 import axios from "axios";
 
-export const EditHeroSection = () => {
+export const EditHeroSection = ({ service }) => {
   // Loading statement
   const [isUpdate, setIsUpdate] = useState(false);
   // image store state
@@ -61,6 +62,8 @@ export const EditHeroSection = () => {
       picture: url.current,
     };
 
+    console.log(banner);
+
     axios
       .post("/create-header", banner)
       .then((response) => {
@@ -92,6 +95,8 @@ export const EditHeroSection = () => {
             <input
               type='text'
               placeholder='Enter Title'
+              value={service?.name}
+              disabled
               className='input w-full formInputBox focus:outline-none focus:border-blue'
               {...register("title", {
                 required: "Must Need Title",

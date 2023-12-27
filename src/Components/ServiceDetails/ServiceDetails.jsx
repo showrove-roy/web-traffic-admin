@@ -24,7 +24,7 @@ export const ServiceDetails = () => {
       <div className='mb-10'>
         <h2 className='text-center text-4xl font-medium'>{service?.name}</h2>
       </div>
-      <EditHeroSection></EditHeroSection>
+    <EditHeroSection service={service}></EditHeroSection>
       <div className='my-10'></div>
       <SubServices
         id={service?.id}
