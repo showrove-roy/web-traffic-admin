@@ -3,6 +3,7 @@ import { BlogCard } from "../../Components/BlogCard/BlogCard";
 import { TitleSection } from "../../Components/TitleSection/TitleSection";
 import axios from "axios";
 import { Loading } from "../../Components/Loading/Loading";
+import ScrollToTop from "../../Components/ScrollToTop/ScrollToTop";
 
 export const Blog = () => {
   const { isLoading, data, refetch } = useQuery({
@@ -18,6 +19,7 @@ export const Blog = () => {
 
   return (
     <div>
+      <ScrollToTop/>
       <TitleSection title={"Add Blogs"} link={"add-blog"} />
 
       <div className='mt-5'>

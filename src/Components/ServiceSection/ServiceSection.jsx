@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { OutlineBtn } from "../OutlineBtn/OutlineBtn";
 import { ServiceTable } from "../ServiceTable/ServiceTable";
 import { TitleSection } from "../TitleSection/TitleSection";
 import axios from "axios";
@@ -28,9 +27,7 @@ export const ServiceSection = () => {
         isLoading={isLoading}
       />
 
-      <div className='mt-5 flex justify-center'>
-        <OutlineBtn btnLink={"hello"} btnText={"Load More"} />
-      </div>
+      
     </div>
   );
 };

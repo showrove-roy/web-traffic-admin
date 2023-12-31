@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import { EditHeroSection } from "../../Page/EditHeroSection/EditHeroSection";
 import { BlogSection } from "../BlogSection/BlogSection";
 import { FAQSection } from "../FAQSection/FAQSection";
@@ -6,21 +6,30 @@ import { SubServices } from "../SubServices/SubServices";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Loading } from "../Loading/Loading";
+import ScrollToTop from "../ScrollToTop/ScrollToTop";
 
 export const ServiceDetails = () => {
+  const serviceData = useLoaderData();
   const { id } = useParams();
   const { isLoading, data, refetch } = useQuery({
     queryKey: ["singleServiceDetails"],
     queryFn: () => axios.get(`/single-category/${id}`, {}),
   });
-  let service = data?.data?.data;
 
+  // store blog data
+  let service;
+  if (serviceData?.data?.success) {
+    service = serviceData?.data?.data;
+  } else {
+    service = data?.data?.data;
+  }
 
   if (isLoading) {
     return <Loading />;
   }
   return (
     <section className=''>
+      <ScrollToTop/>
       <div className='mb-10'>
         <h2 className='text-center text-4xl font-medium'>{service?.name}</h2>
       </div>
