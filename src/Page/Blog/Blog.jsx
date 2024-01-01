@@ -35,7 +35,7 @@ export const Blog = () => {
         ))}
       </div>
 
-      {allBlogs.length >= 5 && (
+      {allBlogs.length >= numOfData && (
         <div className='flex justify-center mb-20 mt-20'>
           <button
             onClick={() => setNumOfData(numOfData + 1)}
