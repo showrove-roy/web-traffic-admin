@@ -40,7 +40,6 @@ export const EditService = () => {
   const handelAddService = (data) => {
     setIsUpdate(true);
     formData.current = data;
-    // console.log(image);
     if (image) {
       saveImage();
     } else {
@@ -110,7 +109,7 @@ export const EditService = () => {
     service = data?.data?.data;
   }
 
-  
+
   return (
     <div className='FormCardBG'>
       <ScrollToTop />

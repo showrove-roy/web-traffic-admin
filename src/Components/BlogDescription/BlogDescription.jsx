@@ -35,7 +35,8 @@ const formats = [
   "color",
   "background",
 ];
-export const BlogDescription = ({ value, setValue }) => {
+export const BlogDescription = ({ value, setValue, }) => {
+ 
   return (
     <div className='mt-10 mb-20 h-screen w-full'>
       <ReactQuill

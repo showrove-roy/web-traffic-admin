@@ -5,12 +5,19 @@ import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Loading } from "../../Components/Loading/Loading";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
-export const AddBlog = () => {
-  // set Description
-  const [value, setValue] = useState("");
+export const EditBlog = () => {
+  const blogData = useLoaderData();
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   // Loading statement
   const [isUpdate, setIsUpdate] = useState(false);
+
+  // set Description
+  const [value, setValue] = useState("");
   // image store state
   const [image, setImage] = useState(null);
   const url = useRef("");
@@ -24,11 +31,31 @@ export const AddBlog = () => {
     reset,
   } = useForm();
 
+  // define sBlog store
+  let sBlog;
+
+  // Blog data load
+  const { isLoading, data, refetch } = useQuery({
+    queryKey: ["singleBogDetails"],
+    queryFn: () => axios.get(`/single-blog/${id}`, {}),
+  });
+  // store Blog data
+  if (blogData?.data?.success) {
+    sBlog = blogData?.data?.data;
+  } else {
+    sBlog = data?.data?.data;
+  }
+
   // handel Add Blog
   const handelAddBlog = (data) => {
     setIsUpdate(true);
     formData.current = data;
-    saveImage();
+    if (image) {
+      saveImage();
+    } else {
+      url.current = sBlog?.picture;
+      handelAddBlogDB();
+    }
   };
 
   // image upload system
@@ -65,11 +92,13 @@ export const AddBlog = () => {
       picture: url.current,
     };
     axios
-      .post("/crete-blog", blog)
+      .put("/update-blog", blog)
       .then((response) => {
         if (response?.data?.success) {
           toast.success("Added Done");
           reset();
+          refetch();
+          navigate("/");
         }
       })
       .catch((err) => console.error(err))
@@ -77,14 +106,16 @@ export const AddBlog = () => {
         setIsUpdate(false);
       });
   };
+
   // loading statement
-  if (isUpdate) {
+  if (isUpdate || isLoading) {
     return <Loading></Loading>;
   }
+
   return (
     <>
       <div className='FormCardBG'>
-        <h5 className='fromTitle'>Blog Info</h5>
+        <h5 className='fromTitle'>Edit Blog Info</h5>
 
         <div className=''>
           <form onSubmit={handleSubmit(handelAddBlog)}>
@@ -95,6 +126,7 @@ export const AddBlog = () => {
               </div>
               <input
                 type='text'
+                defaultValue={sBlog?.title}
                 placeholder='Enter Blog Title'
                 className='input w-full formInputBox focus:outline-none focus:border-blue'
                 {...register("title", {
@@ -115,17 +147,24 @@ export const AddBlog = () => {
                   Featured Image
                 </span>
               </div>
+
+              <div className='mb-5 max-w-40'>
+                <img src={sBlog?.picture} alt='' className='w-full' />
+              </div>
               <input
                 id='file-upload'
                 type='file'
                 accept='image/*'
                 className='w-full formInputBox focus:outline-none focus:border-blue cursor-pointer'
                 onChange={(e) => setImage(e.target.files[0])}
-                required
               />
             </div>
 
-            <BlogDescription value={value} setValue={setValue} />
+            <BlogDescription
+              value={value}
+              insData={sBlog?.descripton}
+              setValue={setValue}
+            />
 
             <div className='mt-5 flex gap-5'>
               <button type='submit' className='btnFill'>
