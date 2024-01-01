@@ -63,8 +63,6 @@ export const EditHeroSection = ({ service }) => {
       catagoryId: service?.id,
     };
 
-    console.log(banner);
-
     axios
       .post("/create-header", banner)
       .then((response) => {
@@ -96,7 +94,7 @@ export const EditHeroSection = ({ service }) => {
             <input
               type='text'
               placeholder='Enter Title'
-              defaultValue={service?.name}
+              defaultValue={service?.Header[0]?.title}
               className='input w-full formInputBox focus:outline-none focus:border-blue'
               {...register("title", {
                 required: "Must Need Title",
@@ -118,6 +116,7 @@ export const EditHeroSection = ({ service }) => {
             </div>
             <textarea
               className='textarea min-h-28 formInputBox focus:outline-none focus:border-blue'
+              defaultValue={service?.Header[0]?.descripton}
               placeholder='Enter Description'
               {...register("banner_description", {
                 required: "Must Need Description",
@@ -133,13 +132,16 @@ export const EditHeroSection = ({ service }) => {
             <div className='label'>
               <span className='label-text text-lg font-medium'>Image</span>
             </div>
+            <div className='mb-5 max-w-96'>
+              <img src={service?.Header[0]?.picture} alt='' className='w-full' />
+            </div>
             <input
               id='file-upload'
               type='file'
               accept='image/*'
               className='w-full formInputBox focus:outline-none focus:border-blue cursor-pointer'
               onChange={(e) => setImage(e.target.files[0])}
-              required
+              // required={}
             />
           </div>
 

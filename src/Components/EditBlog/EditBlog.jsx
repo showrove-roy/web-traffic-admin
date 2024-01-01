@@ -147,7 +147,7 @@ export const EditBlog = () => {
                   Featured Image
                 </span>
               </div>
-
+             
               <div className='mb-5 max-w-40'>
                 <img src={sBlog?.picture} alt='' className='w-full' />
               </div>

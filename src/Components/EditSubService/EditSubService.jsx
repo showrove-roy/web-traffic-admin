@@ -1,15 +1,13 @@
 /* eslint-disable no-empty */
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Loading } from "../../Components/Loading/Loading";
 import axios from "axios";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import ScrollToTop from "../ScrollToTop/ScrollToTop";
-
-export const EditService = () => {
-  const serviceData = useLoaderData();
+export const EditSubService = () => {
+  const subServiceData = useLoaderData();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -27,24 +25,31 @@ export const EditService = () => {
     reset,
   } = useForm();
 
-  // define service store
-  let service;
+  // define subservice store
+  let subService;
 
-  // service data load
+  // subservice data load
   const { isLoading, data, refetch } = useQuery({
-    queryKey: ["singleServiceDetails"],
-    queryFn: () => axios.get(`/single-category/${id}`, {}),
+    queryKey: ["singleSubServiceDetails"],
+    queryFn: () => axios.get(`/single-Subcategory/${id}`, {}),
   });
 
-  // handel Add Service
-  const handelAddService = (data) => {
+  // store sub service data
+  if (subServiceData?.data?.success) {
+    subService = subServiceData?.data?.data;
+  } else {
+    subService = data?.data?.data;
+  }
+
+  // handel Add subService
+  const handelAddSubService = (data) => {
     setIsUpdate(true);
     formData.current = data;
     if (image) {
       saveImage();
     } else {
-      url.current = service?.picture;
-      handelAddServiceDB();
+      url.current = subService?.picture;
+      handelAddSubServiceDB();
     }
   };
 
@@ -70,27 +75,28 @@ export const EditService = () => {
 
       const cloudData = await res.json();
       url.current = cloudData.url;
-      handelAddServiceDB();
+      handelAddSubServiceDB();
     } catch (error) {}
   };
 
   // update to database
-  const handelAddServiceDB = () => {
-    const service = {
-      name: formData.current.service_name,
-      descripton: formData.current.service_description,
+  const handelAddSubServiceDB = () => {
+    const subServiceData = {
+      name: formData.current.subService_name,
+      descripton: formData.current.subService_description,
       picture: url.current,
+      catagoryId: subService?.catagoryId,
     };
 
     axios
-      .put(`/update-category/${id}`, service)
+      .put(`/update-subcategory/${id}`, subServiceData)
       .then((response) => {
         if (response?.data?.success) {
           toast.success("Done");
           reset();
           refetch();
           setIsUpdate(false);
-          navigate("/");
+          navigate(`/service/${subService?.catagoryId}`);
         }
       })
       .catch((err) => console.error(err))
@@ -103,21 +109,12 @@ export const EditService = () => {
     return <Loading></Loading>;
   }
 
-  // store service data
-  if (serviceData?.data?.success) {
-    service = serviceData?.data?.data;
-  } else {
-    service = data?.data?.data;
-  }
-
-
   return (
     <div className='FormCardBG'>
-      <ScrollToTop />
-      <h5 className='fromTitle'>Edit Service</h5>
+      <h5 className='fromTitle'>Edit Sub Service</h5>
 
       <div className=''>
-        <form onSubmit={handleSubmit(handelAddService)}>
+        <form onSubmit={handleSubmit(handelAddSubService)}>
           {/* Service Name */}
           <label className='form-control w-full'>
             <div className='label'>
@@ -127,16 +124,16 @@ export const EditService = () => {
             </div>
             <input
               type='text'
-              defaultValue={service?.name}
+              defaultValue={subService?.name}
               placeholder='Enter Service Name'
               className='input w-full formInputBox focus:outline-none focus:border-blue'
-              {...register("service_name", {
+              {...register("subService_name", {
                 required: "Must Need Service Name",
               })}
             />
-            {errors.service_name && (
+            {errors.subService_name && (
               <p className='text-red mt-1' role='alert'>
-                {errors.service_name?.message}
+                {errors.subService_name?.message}
               </p>
             )}
           </label>
@@ -150,14 +147,14 @@ export const EditService = () => {
             </div>
             <textarea
               className='textarea min-h-28 formInputBox focus:outline-none focus:border-blue'
-              defaultValue={service?.descripton}
+              defaultValue={subService?.descripton}
               placeholder='Enter Service Description'
-              {...register("service_description", {
-                required: "Must Need Service Description",
+              {...register("subService_description", {
+                required: "Must Need Sub-Service Description",
               })}></textarea>
-            {errors.service_description && (
+            {errors.subService_description && (
               <p className='text-red mt-1' role='alert'>
-                {errors.service_description?.message}
+                {errors.subService_description?.message}
               </p>
             )}
           </label>
@@ -166,9 +163,8 @@ export const EditService = () => {
             <div className='label'>
               <span className='label-text text-lg font-medium'>Icon</span>
             </div>
-
             <div className='m-5'>
-              <img src={service?.picture} alt='' />
+              <img src={subService?.picture} alt='' />
             </div>
             <input
               id='file-upload'
