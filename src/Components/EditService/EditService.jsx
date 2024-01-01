@@ -27,19 +27,14 @@ export const EditService = () => {
     reset,
   } = useForm();
 
+  // define service store
+  let service;
+
   // service data load
   const { isLoading, data, refetch } = useQuery({
     queryKey: ["singleServiceDetails"],
     queryFn: () => axios.get(`/single-category/${id}`, {}),
   });
-
-  // store blog data
-  let service;
-  if (serviceData?.data?.success) {
-    service = serviceData?.data?.data;
-  } else {
-    service = data?.data?.data;
-  }
 
   // handel Add Service
   const handelAddService = (data) => {
@@ -87,7 +82,7 @@ export const EditService = () => {
       descripton: formData.current.service_description,
       picture: url.current,
     };
-    
+
     axios
       .put(`/update-category/${id}`, service)
       .then((response) => {
@@ -108,10 +103,17 @@ export const EditService = () => {
     return <Loading></Loading>;
   }
 
-  //   console.log(url.current);
+  // store service data
+  if (serviceData?.data?.success) {
+    service = serviceData?.data?.data;
+  } else {
+    service = data?.data?.data;
+  }
+
+  
   return (
     <div className='FormCardBG'>
-    <ScrollToTop/>
+      <ScrollToTop />
       <h5 className='fromTitle'>Edit Service</h5>
 
       <div className=''>
