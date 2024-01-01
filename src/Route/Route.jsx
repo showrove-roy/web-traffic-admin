@@ -13,6 +13,7 @@ import { ServiceDetails } from "../Components/ServiceDetails/ServiceDetails";
 import { AddSubService } from "../Components/AddSubService/AddSubService";
 import axios from "axios";
 import { AddFeaturedBlog } from "../Page/AddFeaturedBlog/AddFeaturedBlog";
+import { EditService } from "../Components/EditService/EditService";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,11 @@ export const router = createBrowserRouter([
       {
         path: "/add-service",
         element: <AddService></AddService>,
+      },
+      {
+        path: "/edit-service/:id",
+        loader: ({ params }) => axios.get(`/single-category/${params.id}`),
+        element: <EditService></EditService>,
       },
       {
         path: "/edit-hero-section",
