@@ -1,21 +1,19 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useLoaderData} from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { Loading } from "../../Components/Loading/Loading";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
 
-export const AddFAQ = () => {
+export const EditFaq = () => {
+  const faqData = useLoaderData();
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   // Loading statement
   const [isUpdate, setIsUpdate] = useState(false);
 
-  const data = useLoaderData();
-
-  let service = {
-    id: data?.data?.data?.id,
-    name: data?.data?.data?.name,
-  };
   // form Hook
   const {
     register,
@@ -24,26 +22,44 @@ export const AddFAQ = () => {
     reset,
   } = useForm();
 
+  // define faq data
+  let fAq;
+
+  // faq data load
+  const { isLoading, data, refetch } = useQuery({
+    queryKey: ["singleFAQDetails"],
+    queryFn: () => axios.get(`/single-FAQ/${id}`, {}),
+  });
+
+  // store FAQ data
+  if (faqData?.data?.success) {
+    fAq = faqData?.data?.data;
+  } else {
+    fAq = data?.data?.data;
+  }
+
   // Handel add FAQ
   const handelAddFAQ = (data) => {
     const faQ = {
-      Question:data?.question,
+      Question: data?.question,
       Answer: data?.answer,
-      catagoryId: service.id,
+      catagoryId: fAq?.catagoryId,
     };
     axios
-      .post("/crete-FAQ", faQ)
+      .put(`/update-FAQ/${id}`, faQ)
       .then((response) => {
         if (response?.data?.success) {
-          toast.success("Added Done");
+          toast.success("Done");
           reset();
+          refetch();
+          setIsUpdate(false);
+          navigate(`/service/${fAq?.catagoryId}`);
         }
       })
       .catch((err) => console.error(err))
       .finally(() => {
         setIsUpdate(false);
       });
-    
   };
 
   // handel form reset
@@ -54,13 +70,13 @@ export const AddFAQ = () => {
     }
   };
 
-    // loading statement
-    if (isUpdate) {
-      return <Loading></Loading>;
-    }
+  // loading statement
+  if (isUpdate || isLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <div className='FormCardBG'>
-      <h5 className='fromTitle'>Add FAQ for {service?.name}</h5>
+      <h5 className='fromTitle'>Edit FAQ </h5>
 
       <div className=''>
         <form onSubmit={handleSubmit(handelAddFAQ)}>
@@ -71,6 +87,7 @@ export const AddFAQ = () => {
             </div>
             <input
               type='text'
+              defaultValue={fAq?.Question}
               placeholder='Enter Your Question'
               className='input w-full formInputBox focus:outline-none focus:border-blue'
               {...register("question", {
@@ -90,6 +107,7 @@ export const AddFAQ = () => {
               <span className='label-text text-lg font-medium'>Answer</span>
             </div>
             <textarea
+              defaultValue={fAq?.Answer}
               className='textarea h-40 formInputBox focus:outline-none focus:border-blue'
               placeholder='Enter Your Answer'
               {...register("answer", {

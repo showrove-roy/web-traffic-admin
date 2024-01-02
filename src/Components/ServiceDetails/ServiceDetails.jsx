@@ -29,10 +29,11 @@ export const ServiceDetails = () => {
   }
   return (
     <section className=''>
-      <ScrollToTop/>
+      <ScrollToTop />
       <div className='mb-10'>
         <h2 className='text-center text-4xl font-medium'>{service?.name}</h2>
       </div>
+
       <EditHeroSection service={service}></EditHeroSection>
       <div className='my-10'></div>
       <SubServices

@@ -16,6 +16,7 @@ import { AddFeaturedBlog } from "../Page/AddFeaturedBlog/AddFeaturedBlog";
 import { EditService } from "../Components/EditService/EditService";
 import { EditBlog } from "../Components/EditBlog/EditBlog";
 import { EditSubService } from "../Components/EditSubService/EditSubService";
+import { EditFaq } from "../Components/EditFaq/EditFaq";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,11 @@ export const router = createBrowserRouter([
         path: "/add-faq/:id",
         loader: ({ params }) => axios.get(`/single-category/${params.id}`),
         element: <AddFAQ></AddFAQ>,
+      },
+      {
+        path: "/edit-faq/:id",
+        loader: ({ params }) => axios.get(`/single-FAQ/${params.id}`),
+        element: <EditFaq></EditFaq>,
       },
       {
         path: "/add-service",
