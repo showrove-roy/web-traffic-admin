@@ -61,7 +61,8 @@ export const router = createBrowserRouter([
         element: <EditService></EditService>,
       },
       {
-        path: "/edit-hero-section",
+        path: "/edit-hero-section/:id",
+        loader: ({ params }) => axios.get(`/single-category/${params.id}`),
         element: <EditHeroSection></EditHeroSection>,
       },
       {

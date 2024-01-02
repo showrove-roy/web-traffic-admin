@@ -1,5 +1,4 @@
 import { useLoaderData, useParams } from "react-router-dom";
-import { EditHeroSection } from "../../Page/EditHeroSection/EditHeroSection";
 import { BlogSection } from "../BlogSection/BlogSection";
 import { FAQSection } from "../FAQSection/FAQSection";
 import { SubServices } from "../SubServices/SubServices";
@@ -7,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Loading } from "../Loading/Loading";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
+import { HeroSection } from "../HeroSection/HeroSection";
 
 export const ServiceDetails = () => {
   const serviceData = useLoaderData();
@@ -31,10 +31,13 @@ export const ServiceDetails = () => {
     <section className=''>
       <ScrollToTop />
       <div className='mb-10'>
-        <h2 className='text-center text-4xl font-medium'>{service?.name}</h2>
+        <h2 className='text-center text-4xl font-medium text-blue'>
+          {service?.name}
+        </h2>
       </div>
 
-      <EditHeroSection service={service}></EditHeroSection>
+      <HeroSection service={service} isLoading={isLoading}></HeroSection>
+
       <div className='my-10'></div>
       <SubServices
         id={service?.id}

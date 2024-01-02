@@ -5,10 +5,12 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Loading } from "../../Components/Loading/Loading";
 import axios from "axios";
-import { useLoaderData } from "react-router-dom";
+import { BlueButton } from "../BlueButton/BlueButton";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
-export const EditHeroSection = ({ service }) => {
-  const heroData = useLoaderData();
+export const HeroSection = () => {
+  const { id } = useParams();
 
   // Loading statement
   const [isUpdate, setIsUpdate] = useState(false);
@@ -16,6 +18,7 @@ export const EditHeroSection = ({ service }) => {
   const [image, setImage] = useState(null);
   const url = useRef("");
   const formData = useRef("");
+
   // form Hook
   const {
     register,
@@ -23,6 +26,23 @@ export const EditHeroSection = ({ service }) => {
     handleSubmit,
     reset,
   } = useForm();
+
+  const { isLoading, data, refetch } = useQuery({
+    queryKey: ["singleServiceDetails"],
+    queryFn: () => axios.get(`/single-category/${id}`, {}),
+  });
+
+  let service = data?.data?.data;
+  console.log(
+    "🚀 ~ file: HeroSection.jsx:36 ~ HeroSection ~ service:",
+    service?.Header[0]?.descripton
+  );
+
+  console.log(id);
+
+  if (service.id != id) {
+    refetch();
+  }
 
   // handel Add Banner
   const handelAddBanner = (data) => {
@@ -80,12 +100,20 @@ export const EditHeroSection = ({ service }) => {
       });
   };
   // loading statement
-  if (isUpdate) {
+  if (isUpdate || isLoading) {
     return <Loading></Loading>;
   }
   return (
     <div className='FormCardBG'>
-      <h5 className='fromTitle'>Edit Hero Section</h5>
+      <div className='flex justify-between  pb-5 items-center'>
+        <h5 className='lg:text-3xl text-lg font-medium text-black-100'>
+          Hero Section
+        </h5>
+        <BlueButton
+          btnLink={`edit-hero-section/${service?.id}`}
+          btnText={"Edit"}
+        />
+      </div>
 
       <div className=''>
         <form onSubmit={handleSubmit(handelAddBanner)}>
@@ -96,8 +124,9 @@ export const EditHeroSection = ({ service }) => {
             </div>
             <input
               type='text'
+              disabled={service?.Header[0]?.title}
               placeholder='Enter Title'
-              defaultValue={service?.Header[0]?.title}
+              value={service?.name}
               className='input w-full formInputBox focus:outline-none focus:border-blue'
               {...register("title", {
                 required: "Must Need Title",
@@ -119,7 +148,8 @@ export const EditHeroSection = ({ service }) => {
             </div>
             <textarea
               className='textarea min-h-28 formInputBox focus:outline-none focus:border-blue'
-              defaultValue={service?.Header[0]?.descripton}
+              value={service?.Header[0]?.descripton}
+              disabled={service?.Header[0]?.descripton}
               placeholder='Enter Description'
               {...register("banner_description", {
                 required: "Must Need Description",
@@ -142,24 +172,28 @@ export const EditHeroSection = ({ service }) => {
                 className='w-full'
               />
             </div>
-            <input
-              id='file-upload'
-              type='file'
-              accept='image/*'
-              className='w-full formInputBox focus:outline-none focus:border-blue cursor-pointer'
-              onChange={(e) => setImage(e.target.files[0])}
-              // required={}
-            />
+            {!service?.Header[0]?.picture && (
+              <input
+                id='file-upload'
+                type='file'
+                accept='image/*'
+                className='w-full formInputBox focus:outline-none focus:border-blue cursor-pointer'
+                onChange={(e) => setImage(e.target.files[0])}
+                required
+              />
+            )}
           </div>
 
-          <div className='mt-5 flex gap-5'>
-            <button type='submit' className='btnFill'>
-              SAVE
-            </button>
-            <button type='reset' className='btnOutline'>
-              CANCEL
-            </button>
-          </div>
+          {!service?.Header[0]?.picture && (
+            <div className='mt-5 flex gap-5'>
+              <button type='submit' className='btnFill'>
+                SAVE
+              </button>
+              <button type='reset' className='btnOutline'>
+                CANCEL
+              </button>
+            </div>
+          )}
         </form>
       </div>
     </div>
