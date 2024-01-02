@@ -35,8 +35,8 @@ export const AddBlog = () => {
   const saveImage = async () => {
     const data = new FormData();
     data.append("file", image);
-    data.append("upload_preset", "myCloud");
-    data.append("cloud_name", "dldccdcyb");
+    data.append("upload_preset", "web-traffic");
+    data.append("cloud_name", "dyxl0lsly");
 
     try {
       if (image === null) {
@@ -44,7 +44,7 @@ export const AddBlog = () => {
       }
 
       const res = await fetch(
-        "https://api.cloudinary.com/v1_1/dldccdcyb/image/upload",
+        "https://api.cloudinary.com/v1_1/dyxl0lsly/image/upload",
         {
           method: "POST",
           body: data,
