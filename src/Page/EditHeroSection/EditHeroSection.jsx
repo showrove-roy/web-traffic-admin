@@ -5,10 +5,13 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Loading } from "../../Components/Loading/Loading";
 import axios from "axios";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
-export const EditHeroSection = ({ service }) => {
+export const EditHeroSection = () => {
   const heroData = useLoaderData();
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   // Loading statement
   const [isUpdate, setIsUpdate] = useState(false);
@@ -24,11 +27,33 @@ export const EditHeroSection = ({ service }) => {
     reset,
   } = useForm();
 
+  // define Hero data store
+  let bannerData;
+
+  // Hero data load
+  const { isLoading, data, refetch } = useQuery({
+    queryKey: ["singleSubServiceDetails"],
+    queryFn: () => axios.get(`/single-category/${id}`, {}),
+  });
+
+  // store sub service data
+  if (heroData?.data?.success) {
+    bannerData = heroData?.data?.data;
+  } else {
+    bannerData = data?.data?.data;
+  }
+
+
   // handel Add Banner
   const handelAddBanner = (data) => {
     setIsUpdate(true);
     formData.current = data;
-    saveImage();
+    if (image) {
+      saveImage();
+    } else {
+      url.current = bannerData?.Header[0]?.picture;
+      handelAddBannerDB();
+    }
   };
 
   // image upload system
@@ -63,15 +88,19 @@ export const EditHeroSection = ({ service }) => {
       title: formData.current.title,
       descripton: formData.current.banner_description,
       picture: url.current,
-      catagoryId: service?.id,
+      catagoryId: bannerData?.id,
     };
 
     axios
-      .post("/create-header", banner)
+      .put(`update-header/${bannerData?.Header[0]?.id}`, banner)
       .then((response) => {
+        console.log(response);
         if (response?.data?.success) {
-          toast.success("Added Done");
+          toast.success("Done");
           reset();
+          refetch();
+          setIsUpdate(false);
+          navigate(`/service/${id}`);
         }
       })
       .catch((err) => console.error(err))
@@ -79,8 +108,18 @@ export const EditHeroSection = ({ service }) => {
         setIsUpdate(false);
       });
   };
+
+  // handel cancel
+
+  const handelCancel = () => {
+    const conformation = window.confirm("Want to Cancel?");
+    if (conformation) {
+      navigate(`/service/${id}`);
+    }
+  };
+
   // loading statement
-  if (isUpdate) {
+  if (isUpdate || isLoading) {
     return <Loading></Loading>;
   }
   return (
@@ -97,7 +136,7 @@ export const EditHeroSection = ({ service }) => {
             <input
               type='text'
               placeholder='Enter Title'
-              defaultValue={service?.Header[0]?.title}
+              defaultValue={bannerData?.Header[0]?.title}
               className='input w-full formInputBox focus:outline-none focus:border-blue'
               {...register("title", {
                 required: "Must Need Title",
@@ -118,8 +157,8 @@ export const EditHeroSection = ({ service }) => {
               </span>
             </div>
             <textarea
-              className='textarea min-h-28 formInputBox focus:outline-none focus:border-blue'
-              defaultValue={service?.Header[0]?.descripton}
+              className='textarea h-40 formInputBox focus:outline-none focus:border-blue'
+              defaultValue={bannerData?.Header[0]?.descripton}
               placeholder='Enter Description'
               {...register("banner_description", {
                 required: "Must Need Description",
@@ -135,9 +174,9 @@ export const EditHeroSection = ({ service }) => {
             <div className='label'>
               <span className='label-text text-lg font-medium'>Image</span>
             </div>
-            <div className='mb-5 max-w-96'>
+            <div className='mb-5 max-w-60'>
               <img
-                src={service?.Header[0]?.picture}
+                src={bannerData?.Header[0]?.picture}
                 alt=''
                 className='w-full'
               />
@@ -148,7 +187,6 @@ export const EditHeroSection = ({ service }) => {
               accept='image/*'
               className='w-full formInputBox focus:outline-none focus:border-blue cursor-pointer'
               onChange={(e) => setImage(e.target.files[0])}
-              // required={}
             />
           </div>
 
@@ -156,9 +194,9 @@ export const EditHeroSection = ({ service }) => {
             <button type='submit' className='btnFill'>
               SAVE
             </button>
-            <button type='reset' className='btnOutline'>
+            <div onClick={() => handelCancel()} className='btnOutline'>
               CANCEL
-            </button>
+            </div>
           </div>
         </form>
       </div>

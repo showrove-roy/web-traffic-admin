@@ -11,7 +11,6 @@ import { useQuery } from "@tanstack/react-query";
 
 export const HeroSection = () => {
   const { id } = useParams();
-
   // Loading statement
   const [isUpdate, setIsUpdate] = useState(false);
   // image store state
@@ -33,16 +32,11 @@ export const HeroSection = () => {
   });
 
   let service = data?.data?.data;
-  console.log(
-    "🚀 ~ file: HeroSection.jsx:36 ~ HeroSection ~ service:",
-    service?.Header[0]?.descripton
-  );
-
-  console.log(id);
 
   if (service.id != id) {
     refetch();
   }
+  const [inputData, setInputData] = useState(service?.name);
 
   // handel Add Banner
   const handelAddBanner = (data) => {
@@ -109,10 +103,11 @@ export const HeroSection = () => {
         <h5 className='lg:text-3xl text-lg font-medium text-black-100'>
           Hero Section
         </h5>
+        {service?.Header[0]?.title && (
         <BlueButton
           btnLink={`edit-hero-section/${service?.id}`}
           btnText={"Edit"}
-        />
+        />)}
       </div>
 
       <div className=''>
@@ -122,16 +117,24 @@ export const HeroSection = () => {
             <div className='label'>
               <span className='label-text text-lg font-medium'>Title</span>
             </div>
-            <input
-              type='text'
-              disabled={service?.Header[0]?.title}
-              placeholder='Enter Title'
-              value={service?.name}
-              className='input w-full formInputBox focus:outline-none focus:border-blue'
-              {...register("title", {
-                required: "Must Need Title",
-              })}
-            />
+            {service?.Header[0]?.title && (
+              <div className='ps-5'>
+                <p className='font-medium'>{service?.Header[0]?.title}</p>
+              </div>
+            )}
+
+            {!service?.Header[0]?.title && (
+              <input
+                type='text'
+                placeholder='Enter Title'
+                value={inputData}
+                onInput={(e) => setInputData(e.target.value)}
+                className='input w-full formInputBox focus:outline-none focus:border-blue'
+                {...register("title", {
+                  required: "Must Need Title",
+                })}
+              />
+            )}
             {errors.title && (
               <p className='text-red mt-1' role='alert'>
                 {errors.title?.message}
@@ -146,14 +149,20 @@ export const HeroSection = () => {
                 Description
               </span>
             </div>
-            <textarea
-              className='textarea min-h-28 formInputBox focus:outline-none focus:border-blue'
-              value={service?.Header[0]?.descripton}
-              disabled={service?.Header[0]?.descripton}
-              placeholder='Enter Description'
-              {...register("banner_description", {
-                required: "Must Need Description",
-              })}></textarea>
+
+            {service?.Header[0]?.descripton && (
+              <div className='ps-5'>
+                <p>{service?.Header[0]?.descripton}</p>
+              </div>
+            )}
+            {!service?.Header[0]?.descripton && (
+              <textarea
+                className='textarea min-h-28 formInputBox focus:outline-none focus:border-blue'
+                placeholder='Enter Description'
+                {...register("banner_description", {
+                  required: "Must Need Description",
+                })}></textarea>
+            )}
             {errors.banner_description && (
               <p className='text-red mt-1' role='alert'>
                 {errors.banner_description?.message}
@@ -165,13 +174,15 @@ export const HeroSection = () => {
             <div className='label'>
               <span className='label-text text-lg font-medium'>Image</span>
             </div>
-            <div className='mb-5 max-w-96'>
-              <img
-                src={service?.Header[0]?.picture}
-                alt=''
-                className='w-full'
-              />
-            </div>
+            {service?.Header[0]?.picture && (
+              <div className='ps-5 mb-5 max-w-96'>
+                <img
+                  src={service?.Header[0]?.picture}
+                  alt=''
+                  className='w-full'
+                />
+              </div>
+            )}
             {!service?.Header[0]?.picture && (
               <input
                 id='file-upload'
