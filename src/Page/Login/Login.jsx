@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { NavBar } from "../../Components/NavBar/NavBar";
 import LoginPic from "../../assets/login.svg";
 
@@ -34,11 +33,6 @@ export const Login = () => {
                     />
                   </div>
                 </form>
-                <div className='mt-3 flex justify-center'>
-                  <Link to='/' className=''>
-                    Forget Password?
-                  </Link>
-                </div>
               </div>
             </div>
           </div>

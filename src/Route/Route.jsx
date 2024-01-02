@@ -7,7 +7,6 @@ import { Blog } from "../Page/Blog/Blog";
 import { AddFAQ } from "../Page/AddFAQ/AddFAQ";
 import { AddService } from "../Page/AddService/AddService";
 import { EditHeroSection } from "../Page/EditHeroSection/EditHeroSection";
-import { EditProfile } from "../Page/EditProfile/EditProfile";
 import { AddBlog } from "../Page/AddBlog/AddBlog";
 import { ServiceDetails } from "../Components/ServiceDetails/ServiceDetails";
 import { AddSubService } from "../Components/AddSubService/AddSubService";
@@ -65,10 +64,7 @@ export const router = createBrowserRouter([
         loader: ({ params }) => axios.get(`/single-category/${params.id}`),
         element: <EditHeroSection></EditHeroSection>,
       },
-      {
-        path: "/edit-profile",
-        element: <EditProfile></EditProfile>,
-      },
+
       {
         path: "/add-sub-service/:id",
         loader: ({ params }) => axios.get(`/single-category/${params.id}`),
