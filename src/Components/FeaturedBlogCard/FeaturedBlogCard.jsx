@@ -48,7 +48,7 @@ export const FeaturedBlogCard = ({ blog, isLoading, refetch }) => {
         <div className=''>
           <div className='flex gap-5 '>
             <Link
-              to='/'
+              to={`/edit-featured-blog/${blog?.id}`}
               className='px-6 py-1 bg-[#CCFBF1]  text-[#4ea094] font-medium border border-[#CCFBF1] hover:border-[#4ea094]'>
               Edit
             </Link>

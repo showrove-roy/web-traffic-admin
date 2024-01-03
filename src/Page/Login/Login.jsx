@@ -26,11 +26,9 @@ export const Login = () => {
 
   // Login From submit or user Login handel
   const handleLogin = (data) => {
-    console.log(data);
     setLoginError("");
     logIN(data.email, data.password)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         navigate("/");
         reset();
       })
@@ -98,12 +96,11 @@ export const Login = () => {
                       </div>
                     </div>
                     {errors.password && (
-                    <p className='text-red mt-1' role='alert'>
-                      {errors.password?.message}
-                    </p>
-                  )}
+                      <p className='text-red mt-1' role='alert'>
+                        {errors.password?.message}
+                      </p>
+                    )}
                   </div>
-                 
 
                   <div className=''>
                     <input
