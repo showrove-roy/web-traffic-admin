@@ -1,7 +1,7 @@
 /* eslint-disable no-empty */
 import { useForm } from "react-hook-form";
 import { BlogDescription } from "../../Components/BlogDescription/BlogDescription";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Loading } from "../../Components/Loading/Loading";
@@ -18,6 +18,9 @@ export const EditBlog = () => {
 
   // set Description
   const [value, setValue] = useState("");
+  
+  console.log(value,"va;ue")
+ 
   // image store state
   const [image, setImage] = useState(null);
   const url = useRef("");
@@ -45,6 +48,9 @@ export const EditBlog = () => {
   } else {
     sBlog = data?.data?.data;
   }
+  useEffect(()=>{
+    setValue(sBlog?.descripton? (sBlog?.descripton):'<p>Reload Again!</p>')
+  },[id,sBlog?.descripton])
 
   // handel Add Blog
   const handelAddBlog = (data) => {
@@ -87,12 +93,12 @@ export const EditBlog = () => {
   // update to database
   const handelAddBlogDB = () => {
     const blog = {
-      title: formData.current.title,
-      descripton: value,
-      picture: url.current,
+      title: formData.current.title ||sBlog?.title,
+      descripton: value ||sBlog?.descripton,
+      picture: url.current ||sBlog?.picture,
     };
     axios
-      .put("/update-blog", blog)
+      .put(`/update-blog/${id}`, blog)
       .then((response) => {
         if (response?.data?.success) {
           toast.success("Added Done");
@@ -111,6 +117,9 @@ export const EditBlog = () => {
   if (isUpdate || isLoading) {
     return <Loading></Loading>;
   }
+  const handleChange = (value) => {
+    setValue(value);
+  };
 
   return (
     <>
@@ -164,6 +173,7 @@ export const EditBlog = () => {
               value={value}
               insData={sBlog?.descripton}
               setValue={setValue}
+               handleOnChange={handleChange}
             />
 
             <div className='mt-5 flex gap-5'>
