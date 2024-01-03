@@ -3,6 +3,7 @@ import LoginPic from "../../assets/login.svg";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Contexts/AuthProvider";
 import { useState } from "react";
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 export const Login = () => {
   let navigate = useNavigate();
@@ -11,6 +12,9 @@ export const Login = () => {
   const [loginError, setLoginError] = useState("");
   //get Authentication function
   const { logIN, setLoading } = useAuth();
+
+  // password hide show state
+  const [isShow, setIsShow] = useState(false);
 
   // get From-hook function
   const {
@@ -67,27 +71,40 @@ export const Login = () => {
                     })}
                   />
                   {errors.email && (
-                    <p className='text-error mt-1' role='alert'>
+                    <p className='text-red mt-1' role='alert'>
                       {errors.email?.message}
                     </p>
                   )}
-                  <input
-                    type='password'
-                    placeholder='Enter Your Password'
-                    className='input w-full formInputBox focus:outline-none focus:border-blue my-3 md:my-8'
-                    {...register("password", {
-                      required: "Password is required",
-                      minLength: {
-                        value: 6,
-                        message: "Password Length Must be 6 Characters",
-                      },
-                    })}
-                  />
-                  {errors.password && (
-                    <p className='text-error mt-1' role='alert'>
+                  <div className='my-3 md:my-8'>
+                    <div className='flex items-center relative'>
+                      <input
+                        type={isShow ? "text" : "password"}
+                        placeholder='Enter Your Password'
+                        className='input w-full formInputBox focus:outline-none focus:border-blue '
+                        {...register("password", {
+                          required: "Password is required",
+                          minLength: {
+                            value: 6,
+                            message: "Password Length Must be 6 Characters",
+                          },
+                        })}
+                      />
+                      <div className='absolute right-3 cursor-pointer text-3xl text-[#878787]'>
+                        {isShow ? (
+                          <IoIosEyeOff onClick={() => setIsShow(!isShow)} />
+                        ) : (
+                          <IoIosEye onClick={() => setIsShow(!isShow)} />
+                        )}
+                      </div>
+                    </div>
+                    {errors.password && (
+                    <p className='text-red mt-1' role='alert'>
                       {errors.password?.message}
                     </p>
                   )}
+                  </div>
+                 
+
                   <div className=''>
                     <input
                       type='submit'
