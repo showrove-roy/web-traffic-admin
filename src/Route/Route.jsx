@@ -16,11 +16,16 @@ import { EditService } from "../Components/EditService/EditService";
 import { EditBlog } from "../Components/EditBlog/EditBlog";
 import { EditSubService } from "../Components/EditSubService/EditSubService";
 import { EditFaq } from "../Components/EditFaq/EditFaq";
+import { PrivateRoute } from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main></Main>,
+    element: (
+      <PrivateRoute>
+        <Main></Main>
+      </PrivateRoute>
+    ),
     errorElement: <Error404></Error404>,
     children: [
       {

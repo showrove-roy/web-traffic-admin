@@ -7,9 +7,19 @@ import { Toaster } from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Loading } from "../Components/Loading/Loading";
+import { useAuth } from "../Contexts/AuthProvider";
 
 export const Main = () => {
   const [showNav, setShowNav] = useState(false);
+
+  const { logOut } = useAuth();
+
+  // LogOut
+  const handelLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((err) => alert(err.message));
+  };
 
   const { isLoading, data } = useQuery({
     queryKey: ["allServices"],
@@ -36,7 +46,9 @@ export const Main = () => {
               <ul className='text-base p-0'>
                 {services.map((service, i) => (
                   <li key={i}>
-                    <Link to={`/service/${service?.id}`} className='hover:text-blue'>
+                    <Link
+                      to={`/service/${service?.id}`}
+                      className='hover:text-blue'>
                       {service?.name.slice(0, 18)}
                       {service?.name?.length >= 18 && "..."}
                     </Link>
@@ -54,12 +66,11 @@ export const Main = () => {
       </div>
 
       <div className='flex items-center flex-col gap-5 mt-20'>
-        <Link
-          to=''
+        <button
+          onClick={() => handelLogOut()}
           className='py-[14px] px-12 text-blue border-2 font-medium border-blue rounded-full hover:btnShadow w-fit text-sm'>
           Log Out
-        </Link>
-       
+        </button>
       </div>
     </>
   );
@@ -146,13 +157,11 @@ export const Main = () => {
                 </div>
 
                 <div className='flex items-center flex-col gap-5 '>
-                  <Link
-                    to=''
+                  <button
                     className='py-[14px] px-12 text-blue border-2 font-medium border-blue rounded-full hover:btnShadow w-fit text-sm'
-                    onClick={() => setShowNav(!true)}>
+                    onClick={() => handelLogOut()}>
                     Log Out
-                  </Link>
-                  
+                  </button>
                 </div>
               </div>
             </div>

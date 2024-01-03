@@ -2,7 +2,6 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useState } from "react";
 import {
-  createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -20,12 +19,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   // stored login user
   const [user, setUser] = useState();
-
-  //Create a new user's using email address and password
-  const createNewUser = (email, password) => {
-    setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
 
   // sign in user
   const logIN = (email, password) => {
@@ -48,8 +41,9 @@ export const AuthProvider = ({ children }) => {
 
     return () => unsubscribe();
   }, []);
+
+  
   const authInfo = {
-    createNewUser,
     logIN,
     user,
     logOut,
