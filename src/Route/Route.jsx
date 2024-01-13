@@ -18,6 +18,7 @@ import { EditSubService } from "../Components/EditSubService/EditSubService";
 import { EditFaq } from "../Components/EditFaq/EditFaq";
 import { PrivateRoute } from "./PrivateRoute";
 import { EditFeaturedBlog } from "../Components/EditFeaturedBlog/EditFeaturedBlog";
+import { ForgetPassword } from "../Page/ForgetPassword/ForgetPassword";
 
 export const router = createBrowserRouter([
   {
@@ -101,5 +102,9 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login></Login>,
+  },
+  {
+    path: "/forget-password",
+    element: <ForgetPassword></ForgetPassword>,
   },
 ]);
