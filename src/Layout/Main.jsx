@@ -62,6 +62,16 @@ export const Main = () => {
               Blog
             </Link>
           </li>
+          <li>
+            <Link to='/contact' className='hover:text-blue'>
+              Contact
+            </Link>
+          </li>
+          <li>
+            <Link to='/video' className='hover:text-blue'>
+              Video
+            </Link>
+          </li>
         </ul>
       </div>
 

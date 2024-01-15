@@ -19,6 +19,8 @@ import { EditFaq } from "../Components/EditFaq/EditFaq";
 import { PrivateRoute } from "./PrivateRoute";
 import { EditFeaturedBlog } from "../Components/EditFeaturedBlog/EditFeaturedBlog";
 import { ForgetPassword } from "../Page/ForgetPassword/ForgetPassword";
+import { Contact } from "../Components/Contact/Contact";
+import { Video } from "../Components/Video/Video";
 
 export const router = createBrowserRouter([
   {
@@ -96,6 +98,14 @@ export const router = createBrowserRouter([
         path: "/edit-featured-blog/:id",
         loader: ({ params }) => axios.get(`/single-blogs/${params.id}`),
         element: <EditFeaturedBlog></EditFeaturedBlog>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
+      },
+      {
+        path: "/video",
+        element: <Video></Video>
       },
     ],
   },
