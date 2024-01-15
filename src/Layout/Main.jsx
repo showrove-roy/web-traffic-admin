@@ -72,6 +72,11 @@ export const Main = () => {
               Video
             </Link>
           </li>
+          <li>
+            <Link to='/why-web' className='hover:text-blue'>
+             Why Web
+            </Link>
+          </li>
         </ul>
       </div>
 

@@ -21,6 +21,7 @@ import { EditFeaturedBlog } from "../Components/EditFeaturedBlog/EditFeaturedBlo
 import { ForgetPassword } from "../Page/ForgetPassword/ForgetPassword";
 import { Contact } from "../Components/Contact/Contact";
 import { Video } from "../Components/Video/Video";
+import { WhyWeb } from "../Components/WhyWeb/WhyWeb";
 
 export const router = createBrowserRouter([
   {
@@ -106,6 +107,10 @@ export const router = createBrowserRouter([
       {
         path: "/video",
         element: <Video></Video>
+      },
+      {
+        path: "/why-web",
+        element: <WhyWeb></WhyWeb>
       },
     ],
   },
