@@ -77,6 +77,11 @@ export const Main = () => {
              Why Web
             </Link>
           </li>
+          <li>
+            <Link to='/grow-yours' className='hover:text-blue'>
+            Grow Your
+            </Link>
+          </li>
         </ul>
       </div>
 

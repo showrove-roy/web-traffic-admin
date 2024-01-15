@@ -22,6 +22,7 @@ import { ForgetPassword } from "../Page/ForgetPassword/ForgetPassword";
 import { Contact } from "../Components/Contact/Contact";
 import { Video } from "../Components/Video/Video";
 import { WhyWeb } from "../Components/WhyWeb/WhyWeb";
+import { GrowYour } from "../Components/GrowYour/GrowYour";
 
 export const router = createBrowserRouter([
   {
@@ -111,6 +112,10 @@ export const router = createBrowserRouter([
       {
         path: "/why-web",
         element: <WhyWeb></WhyWeb>
+      },
+      {
+        path: "/grow-yours",
+        element: <GrowYour></GrowYour>
       },
     ],
   },
