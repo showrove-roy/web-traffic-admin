@@ -28,12 +28,12 @@ export const Contact = () => {
   }
 
   // store contact data
-  let contact = data?.data?.data;
-  console.log("🚀 ~ Contact ~ contact:", contact)
-
+  let contact = data.data.data;
+  // console.log(contact[0]);
 
   // handel edit contact
   const handelEditContact = (data) => {
+    
     setIsUpdate(true);
     const contact = {
       email: data?.email,
@@ -44,7 +44,7 @@ export const Contact = () => {
     console.log(contact);
 
     axios
-      .put("/update-contact/2", contact)
+      .put("/update-contact/3", contact)
       .then((response) => {
         console.log(response);
         if (response?.data?.success) {
@@ -60,7 +60,8 @@ export const Contact = () => {
   };
 
   return (
-    <div className='FormCardBG'>
+   
+      <div className='FormCardBG'>
       <h5 className='fromTitle'>Contact Info</h5>
 
       <div className=''>
@@ -72,7 +73,7 @@ export const Contact = () => {
             </div>
             <input
               type='text'
-              // defaultValue={contact[0]?.location}
+              defaultValue={contact[0]?.location}
               placeholder='Enter Location'
               onInputCapture={() => setBtnDisabled(false)}
               className='input w-full formInputBox focus:outline-none focus:border-blue'
@@ -94,7 +95,7 @@ export const Contact = () => {
             </div>
             <input
               type='number'
-              // defaultValue={contact[0]?.phone}
+              defaultValue={contact[0]?.phone}
               placeholder='Enter Phone'
               onInputCapture={() => setBtnDisabled(false)}
               className='input w-full formInputBox focus:outline-none focus:border-blue'
@@ -115,7 +116,7 @@ export const Contact = () => {
             </div>
             <input
               type='email'
-              // defaultValue={contact[0]?.email}
+              defaultValue={contact[0]?.email}
               placeholder='Enter Email'
               onInputCapture={() => setBtnDisabled(false)}
               className='input w-full formInputBox focus:outline-none focus:border-blue'
@@ -136,7 +137,7 @@ export const Contact = () => {
             </div>
             <input
               type='text'
-              // defaultValue={contact[0]?.hours}
+              defaultValue={contact[0]?.hours}
               placeholder='Enter Our Hours'
               onInputCapture={() => setBtnDisabled(false)}
               className='input w-full formInputBox focus:outline-none focus:border-blue'
@@ -162,5 +163,6 @@ export const Contact = () => {
         </form>
       </div>
     </div>
+   
   );
 };
