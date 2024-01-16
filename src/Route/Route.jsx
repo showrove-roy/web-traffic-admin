@@ -18,6 +18,11 @@ import { EditSubService } from "../Components/EditSubService/EditSubService";
 import { EditFaq } from "../Components/EditFaq/EditFaq";
 import { PrivateRoute } from "./PrivateRoute";
 import { EditFeaturedBlog } from "../Components/EditFeaturedBlog/EditFeaturedBlog";
+import { ForgetPassword } from "../Page/ForgetPassword/ForgetPassword";
+import { Contact } from "../Components/Contact/Contact";
+import { Video } from "../Components/Video/Video";
+import { WhyWeb } from "../Components/WhyWeb/WhyWeb";
+import { GrowYour } from "../Components/GrowYour/GrowYour";
 
 export const router = createBrowserRouter([
   {
@@ -96,10 +101,30 @@ export const router = createBrowserRouter([
         loader: ({ params }) => axios.get(`/single-blogs/${params.id}`),
         element: <EditFeaturedBlog></EditFeaturedBlog>,
       },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
+      },
+      {
+        path: "/video",
+        element: <Video></Video>
+      },
+      {
+        path: "/why-web",
+        element: <WhyWeb></WhyWeb>
+      },
+      {
+        path: "/grow-yours",
+        element: <GrowYour></GrowYour>
+      },
     ],
   },
   {
     path: "/login",
     element: <Login></Login>,
+  },
+  {
+    path: "/forget-password",
+    element: <ForgetPassword></ForgetPassword>,
   },
 ]);

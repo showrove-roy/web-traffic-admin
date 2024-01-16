@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import LoginPic from "../../assets/login.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Contexts/AuthProvider";
 import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
@@ -108,6 +108,11 @@ export const Login = () => {
                       value='Login'
                       className='bg-blue text-white text-center py-4 px-12 rounded-full btnShadow hover:shadow-none w-full cursor-pointer'
                     />
+                  </div>
+                  <div className='flex justify-center mt-6'>
+                    <Link to='/forget-password' className='hover:text-blue'>
+                      Forget Password
+                    </Link>
                   </div>
                 </form>
               </div>
