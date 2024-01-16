@@ -67,7 +67,7 @@ export const AddFeaturedBlog = () => {
       picture: url.current,
       catagoryId: data.data.id,
     };
-    console.log(blog);
+
     axios
       .post("/crete-blogs", blog)
       .then((response) => {

@@ -3,16 +3,14 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { Loading } from "../Loading/Loading";
 
-export const SubServiceTable = ({ subService, refetch,isLoading }) => {
-   // Sub Service delete system
-   const handelDelete = (id) => {
+export const SubServiceTable = ({ subService, refetch, isLoading }) => {
+  // Sub Service delete system
+  const handelDelete = (id) => {
     const conformation = window.confirm("Want to Delete?");
     if (conformation) {
       axios
         .delete(`deleted-subcategory/${id}`)
-        .then((response) => {
-          console.log(response);
-        })
+        .then(() => {})
         .catch((error) => {
           console.error(error);
         })
@@ -30,7 +28,7 @@ export const SubServiceTable = ({ subService, refetch,isLoading }) => {
         {/* head */}
         <thead>
           <tr className='text-[#00000099] lg:text-base font-medium'>
-          <th className='font-semibold'>No.</th>
+            <th className='font-semibold'>No.</th>
             <th className='font-semibold'>Title</th>
             <th className='font-semibold'>Description</th>
             <th className='font-semibold'>Icon</th>

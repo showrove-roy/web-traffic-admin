@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Loading } from "../../Components/Loading/Loading";
 import axios from "axios";
-import { useLoaderData} from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 export const AddSubService = () => {
   const data = useLoaderData();
 
@@ -28,7 +28,6 @@ export const AddSubService = () => {
 
   // handel Add Service
   const handelAddSubService = (data) => {
-    console.log("🚀 ~ file: AddSubService.jsx:31 ~ handelAddSubService ~ data:", data)
     setIsUpdate(true);
     formData.current = data;
     saveImage();
@@ -68,8 +67,6 @@ export const AddSubService = () => {
       picture: url.current,
       catagoryId: service.id,
     };
-
-    console.log(subService);
 
     axios
       .post("/crete-subcategory", subService)

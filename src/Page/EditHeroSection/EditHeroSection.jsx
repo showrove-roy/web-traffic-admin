@@ -93,7 +93,6 @@ export const EditHeroSection = () => {
     axios
       .put(`update-header/${bannerData?.Header[0]?.id}`, banner)
       .then((response) => {
-        console.log(response);
         if (response?.data?.success) {
           toast.success("Done");
           reset();

@@ -18,9 +18,7 @@ export const EditBlog = () => {
 
   // set Description
   const [value, setValue] = useState("");
-  
-  console.log(value,"va;ue")
- 
+
   // image store state
   const [image, setImage] = useState(null);
   const url = useRef("");
@@ -48,9 +46,9 @@ export const EditBlog = () => {
   } else {
     sBlog = data?.data?.data;
   }
-  useEffect(()=>{
-    setValue(sBlog?.descripton? (sBlog?.descripton):'<p>Reload Again!</p>')
-  },[id,sBlog?.descripton])
+  useEffect(() => {
+    setValue(sBlog?.descripton ? sBlog?.descripton : "<p>Reload Again!</p>");
+  }, [id, sBlog?.descripton]);
 
   // handel Add Blog
   const handelAddBlog = (data) => {
@@ -93,9 +91,9 @@ export const EditBlog = () => {
   // update to database
   const handelAddBlogDB = () => {
     const blog = {
-      title: formData.current.title ||sBlog?.title,
-      descripton: value ||sBlog?.descripton,
-      picture: url.current ||sBlog?.picture,
+      title: formData.current.title || sBlog?.title,
+      descripton: value || sBlog?.descripton,
+      picture: url.current || sBlog?.picture,
     };
     axios
       .put(`/update-blog/${id}`, blog)
@@ -156,7 +154,7 @@ export const EditBlog = () => {
                   Featured Image
                 </span>
               </div>
-             
+
               <div className='mb-5 max-w-40'>
                 <img src={sBlog?.picture} alt='' className='w-full' />
               </div>
@@ -173,7 +171,7 @@ export const EditBlog = () => {
               value={value}
               insData={sBlog?.descripton}
               setValue={setValue}
-               handleOnChange={handleChange}
+              handleOnChange={handleChange}
             />
 
             <div className='mt-5 flex gap-5'>

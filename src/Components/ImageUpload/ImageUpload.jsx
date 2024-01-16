@@ -32,8 +32,6 @@ export const ImageUpload = () => {
     } catch (error) {}
   };
 
-  console.log(url);
-
   return (
     <>
       <form action=''>
