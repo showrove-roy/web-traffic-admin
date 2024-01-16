@@ -20,7 +20,7 @@ export const Contact = () => {
   // load data
   const { isLoading, data, refetch } = useQuery({
     queryKey: ["contact"],
-    queryFn: () => axios.get("/all-contact", {}),
+    queryFn: () => axios.get("/single-contact/3", {}),
   });
 
   if (isLoading) {
@@ -28,8 +28,9 @@ export const Contact = () => {
   }
 
   // store contact data
-  let contact = data.data.data;
-  // console.log(contact[0]);
+  let contact = data?.data?.data;
+  console.log("🚀 ~ Contact ~ contact:", contact)
+
 
   // handel edit contact
   const handelEditContact = (data) => {
@@ -71,7 +72,7 @@ export const Contact = () => {
             </div>
             <input
               type='text'
-              defaultValue={contact[0]?.location}
+              // defaultValue={contact[0]?.location}
               placeholder='Enter Location'
               onInputCapture={() => setBtnDisabled(false)}
               className='input w-full formInputBox focus:outline-none focus:border-blue'
@@ -93,7 +94,7 @@ export const Contact = () => {
             </div>
             <input
               type='number'
-              defaultValue={contact[0]?.phone}
+              // defaultValue={contact[0]?.phone}
               placeholder='Enter Phone'
               onInputCapture={() => setBtnDisabled(false)}
               className='input w-full formInputBox focus:outline-none focus:border-blue'
@@ -114,7 +115,7 @@ export const Contact = () => {
             </div>
             <input
               type='email'
-              defaultValue={contact[0]?.email}
+              // defaultValue={contact[0]?.email}
               placeholder='Enter Email'
               onInputCapture={() => setBtnDisabled(false)}
               className='input w-full formInputBox focus:outline-none focus:border-blue'
@@ -135,7 +136,7 @@ export const Contact = () => {
             </div>
             <input
               type='text'
-              defaultValue={contact[0]?.hours}
+              // defaultValue={contact[0]?.hours}
               placeholder='Enter Our Hours'
               onInputCapture={() => setBtnDisabled(false)}
               className='input w-full formInputBox focus:outline-none focus:border-blue'
