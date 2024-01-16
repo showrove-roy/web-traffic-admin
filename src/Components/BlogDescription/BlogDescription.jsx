@@ -35,7 +35,7 @@ const formats = [
   "color",
   "background",
 ];
-export const BlogDescription = ({ value, handleOnChange,  insData }) => {
+export const BlogDescription = ({ value, handleOnChange,  }) => {
  
   return (
     <div className='mt-10 mb-20 h-screen w-full'>
