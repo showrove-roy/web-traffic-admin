@@ -25,7 +25,7 @@ export const WhyWeb = () => {
   // Hero data load
   const { isLoading, data, refetch } = useQuery({
     queryKey: ["whyWeb"],
-    queryFn: () => axios.get("single-web/2", {}),
+    queryFn: () => axios.get("single-web/1", {}),
   });
 
   let bannerData = data?.data?.data;
@@ -77,7 +77,7 @@ export const WhyWeb = () => {
     };
 
     axios
-      .put("update-web/2", banner)
+      .put("update-web/1", banner)
       .then((response) => {
         if (response?.data?.success) {
           toast.success("Done");

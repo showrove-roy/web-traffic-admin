@@ -44,7 +44,7 @@ export const Main = () => {
             <details>
               <summary className='hover:text-blue'>Services</summary>
               <ul className='text-base p-0'>
-                {services.map((service, i) => (
+                {services?.map((service, i) => (
                   <li key={i}>
                     <Link
                       to={`/service/${service?.id}`}
@@ -151,7 +151,7 @@ export const Main = () => {
                       <details>
                         <summary className='hover:text-blue'>Services</summary>
                         <ul className='text-base p-0'>
-                          {services.map((service, i) => (
+                          {services?.map((service, i) => (
                             <li key={i}>
                               <Link
                                 to='/digital-marketing'

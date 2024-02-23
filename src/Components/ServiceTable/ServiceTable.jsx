@@ -37,7 +37,7 @@ export const ServiceTable = ({ services, refetch, isLoading }) => {
           </tr>
         </thead>
         <tbody>
-          {services.map((service, i) => (
+          {services?.map((service, i) => (
             <tr key={service?.id}>
               <th>{i + 1}</th>
               <td>{service?.name}</td>

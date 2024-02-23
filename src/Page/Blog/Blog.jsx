@@ -18,7 +18,7 @@ export const Blog = () => {
   }
 
   // store blog data
-  let allBlogs = data.data.data;
+  let allBlogs = data?.data?.data;
   return (
     <div>
       <ScrollToTop />
@@ -35,7 +35,7 @@ export const Blog = () => {
         ))}
       </div>
 
-      {allBlogs.length >= numOfData && (
+      {allBlogs?.length >= numOfData && (
         <div className='flex justify-center mb-20 mt-20'>
           <button
             onClick={() => setNumOfData(numOfData + 5)}

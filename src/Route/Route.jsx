@@ -16,7 +16,7 @@ import { EditService } from "../Components/EditService/EditService";
 import { EditBlog } from "../Components/EditBlog/EditBlog";
 import { EditSubService } from "../Components/EditSubService/EditSubService";
 import { EditFaq } from "../Components/EditFaq/EditFaq";
-import { PrivateRoute } from "./PrivateRoute";
+
 import { EditFeaturedBlog } from "../Components/EditFeaturedBlog/EditFeaturedBlog";
 import { ForgetPassword } from "../Page/ForgetPassword/ForgetPassword";
 import { Contact } from "../Components/Contact/Contact";
@@ -28,9 +28,9 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <PrivateRoute>
+     
         <Main></Main>
-      </PrivateRoute>
+   
     ),
     errorElement: <Error404></Error404>,
     children: [

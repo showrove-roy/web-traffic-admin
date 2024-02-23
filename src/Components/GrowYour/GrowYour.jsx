@@ -26,7 +26,7 @@ export const GrowYour = () => {
   // Hero data load
   const { isLoading, data, refetch } = useQuery({
     queryKey: ["whyWeb"],
-    queryFn: () => axios.get("single-grow/2", {}),
+    queryFn: () => axios.get("single-grow/1", {}),
   });
 
   let bannerData = data?.data?.data;
@@ -78,7 +78,7 @@ export const GrowYour = () => {
     };
 
     axios
-      .put("update-grow/2", banner)
+      .put("update-grow/1", banner)
       .then((response) => {
         if (response?.data?.success) {
           toast.success("Done");

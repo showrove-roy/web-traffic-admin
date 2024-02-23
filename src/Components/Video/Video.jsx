@@ -23,7 +23,7 @@ export const Video = () => {
   // video data load
   const { isLoading, data, refetch } = useQuery({
     queryKey: ["singleSubServiceDetails"],
-    queryFn: () => axios.get("single-video/2", {}),
+    queryFn: () => axios.get("single-video/1", {}),
   });
 
   const videoData = data?.data?.data;
@@ -34,7 +34,7 @@ export const Video = () => {
     };
 
     axios
-      .put("/update-video/2", video)
+      .put("/update-video/1", video)
       .then((response) => {
         if (response?.data?.success) {
           toast.success("Update Video Done ");

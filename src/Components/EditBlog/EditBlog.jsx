@@ -47,8 +47,8 @@ export const EditBlog = () => {
     sBlog = data?.data?.data;
   }
   useEffect(() => {
-    setValue(sBlog?.descripton ? sBlog?.descripton : "<p>Reload Again!</p>");
-  }, [id, sBlog?.descripton]);
+    setValue(blogData?.data?.data ? blogData?.data?.data?.descripton : "<p>Reload Again!</p>");
+  }, [id,blogData?.data?.data?.descripton]);
 
   // handel Add Blog
   const handelAddBlog = (data) => {

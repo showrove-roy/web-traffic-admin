@@ -20,7 +20,7 @@ export const Contact = () => {
   // load data
   const { isLoading, data, refetch } = useQuery({
     queryKey: ["contact"],
-    queryFn: () => axios.get("/single-contact/3", {}),
+    queryFn: () => axios.get("/single-contact/1", {}),
   });
 
   if (isLoading) {
@@ -41,7 +41,7 @@ export const Contact = () => {
     };
 
     axios
-      .put("/update-contact/3", contact)
+      .put("/update-contact/1", contact)
       .then((response) => {
         if (response?.data?.success) {
           toast.success("Update Done");
