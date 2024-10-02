@@ -23,14 +23,16 @@ import { Contact } from "../Components/Contact/Contact";
 import { Video } from "../Components/Video/Video";
 import { WhyWeb } from "../Components/WhyWeb/WhyWeb";
 import { GrowYour } from "../Components/GrowYour/GrowYour";
+import { DemoSection } from "../Components/DemoSection/DemoSection";
+import { AddDemo } from "../Page/AddDemo/AddDemo";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <PrivateRoute>
+   
         <Main></Main>
-      </PrivateRoute>
+      
     ),
     errorElement: <Error404></Error404>,
     children: [
@@ -117,6 +119,14 @@ export const router = createBrowserRouter([
         path: "/grow-yours",
         element: <GrowYour></GrowYour>
       },
+      {
+        path:"/demo",
+        element:<DemoSection></DemoSection>
+      },
+      {
+        path:"/AddDemo",
+        element:<AddDemo></AddDemo>
+      }
     ],
   },
   {

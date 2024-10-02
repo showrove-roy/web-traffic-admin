@@ -22,7 +22,7 @@ export const Main = () => {
   };
 
   const { isLoading, data } = useQuery({
-    queryKey: ["allServices"],
+    queryKey: ["allCategory"],
     queryFn: () => axios.get("/all-category", {}),
   });
 
@@ -30,7 +30,7 @@ export const Main = () => {
     return <Loading />;
   }
 
-  let services = data.data.data;
+  let category = data.data.data;
   const Menu = (
     <>
       <div className='px-8 py-5'>
@@ -44,7 +44,7 @@ export const Main = () => {
             <details>
               <summary className='hover:text-blue'>Services</summary>
               <ul className='text-base p-0'>
-                {services.map((service, i) => (
+                {category?.map((service, i) => (
                   <li key={i}>
                     <Link
                       to={`/service/${service?.id}`}
@@ -80,6 +80,11 @@ export const Main = () => {
           <li>
             <Link to='/grow-yours' className='hover:text-blue'>
             Grow Your
+            </Link>
+          </li>
+          <li>
+            <Link to='/demo' className='hover:text-blue'>
+           Demo section
             </Link>
           </li>
         </ul>
@@ -151,7 +156,7 @@ export const Main = () => {
                       <details>
                         <summary className='hover:text-blue'>Services</summary>
                         <ul className='text-base p-0'>
-                          {services.map((service, i) => (
+                          {category?.map((service, i) => (
                             <li key={i}>
                               <Link
                                 to='/digital-marketing'
@@ -171,6 +176,14 @@ export const Main = () => {
                         className='hover:text-blue'
                         onClick={() => setShowNav(!true)}>
                         Blog
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to='/demo'
+                        className='hover:text-blue'
+                        onClick={() => setShowNav(!true)}>
+                        Demo Section
                       </Link>
                     </li>
                   </ul>
