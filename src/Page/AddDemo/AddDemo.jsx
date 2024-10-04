@@ -5,8 +5,25 @@ import toast from "react-hot-toast";
 import { Loading } from "../../Components/Loading/Loading";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 export const AddDemo = () => {
+ // Loading statement
+  const [isUpdate, setIsUpdate] = useState(false);
+  // image store state
+  const [image, setImage] = useState(null);
+  const navigate = useNavigate();
+  const url = useRef("");
+  const formData = useRef("");
+  // form Hook
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm();
+
+
     const { isLoading, data, refetch } = useQuery({
         queryKey: ["Services"],
         queryFn: () => axios.get("/all-subcategory", {}),
@@ -22,23 +39,11 @@ export const AddDemo = () => {
      
 
 
-  // Loading statement
-  const [isUpdate, setIsUpdate] = useState(false);
-  // image store state
-  const [image, setImage] = useState(null);
-  const url = useRef("");
-  const formData = useRef("");
-  // form Hook
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = useForm();
+ 
 
   // handel Add Service
   const handelAddService = (data) => {
-    setIsUpdate(true);
+    // setIsUpdate(true);
     formData.current = data;
 
     console.log(formData.current,"formData.current")
@@ -74,15 +79,10 @@ export const AddDemo = () => {
   // update to database
   const handelAddServiceDB = () => {
     const service = {
-
-
-
-   
       link: formData.current.service_description,
       image: url.current,
       price:11,
-subCatagoryId:parseInt(formData.current.
-    Service)
+subCatagoryId:parseInt(formData.current.Service)
 
     };
 
@@ -92,11 +92,12 @@ subCatagoryId:parseInt(formData.current.
         if (response?.data?.success) {
           toast.success("Added Done");
           reset();
+          navigate('/demo')
         }
       })
       .catch((err) => console.error(err))
       .finally(() => {
-        setIsUpdate(false);
+         setIsUpdate(false);
       });
   };
   // loading statement
