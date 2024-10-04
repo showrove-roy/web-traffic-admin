@@ -52,7 +52,7 @@ export const DemoTable = ({ currentPosts, refetch, isLoading}) => {
 
               <td className='flex gap-2'>
                 <Link
-                  to={`/edit-sub-service/${sub?.id}`}
+                  to={`/update-service/${sub?.id}`}
                   className='px-6 py-1 bg-[#CCFBF1]  text-[#4ea094] font-medium border border-[#CCFBF1] hover:border-[#4ea094]'>
                   Edit
                 </Link>

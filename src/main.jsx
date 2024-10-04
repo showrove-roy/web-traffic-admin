@@ -6,7 +6,7 @@ import { router } from "./Route/Route";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import axios from "axios";
 import { AuthProvider } from "./Contexts/AuthProvider";
-axios.defaults.baseURL = "http://localhost:3003/api/v1";
+axios.defaults.baseURL = "https://web-tarffic2.vercel.app/api/v1";
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(

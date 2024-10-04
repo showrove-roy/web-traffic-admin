@@ -25,13 +25,14 @@ import { WhyWeb } from "../Components/WhyWeb/WhyWeb";
 import { GrowYour } from "../Components/GrowYour/GrowYour";
 import { DemoSection } from "../Components/DemoSection/DemoSection";
 import { AddDemo } from "../Page/AddDemo/AddDemo";
+import { EditDemo } from "../Components/EditeDemo/EditDemo";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: (
    
-        <Main></Main>
+       <PrivateRoute> <Main></Main></PrivateRoute>
       
     ),
     errorElement: <Error404></Error404>,
@@ -126,7 +127,12 @@ export const router = createBrowserRouter([
       {
         path:"/AddDemo",
         element:<AddDemo></AddDemo>
-      }
+      },
+      {
+        path: "/update-service/:id",
+        loader: ({ params }) => axios.get(`/single-service/${params.id}`),
+        element: <EditDemo></EditDemo>,
+      },
     ],
   },
   {

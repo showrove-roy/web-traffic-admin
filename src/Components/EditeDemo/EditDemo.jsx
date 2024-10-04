@@ -6,7 +6,7 @@ import { Loading } from "../../Components/Loading/Loading";
 import axios from "axios";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-export const EditSubService = () => {
+export const EditDemo = () => {
   const subServiceData = useLoaderData();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -27,11 +27,12 @@ export const EditSubService = () => {
 
   // define subservice store
   let subService;
+  
 
   // subservice data load
   const { isLoading, data, refetch } = useQuery({
-    queryKey: ["singleSubServiceDetails"],
-    queryFn: () => axios.get(`/single-Subcategory/${id}`, {}),
+    queryKey: ["singleServiceDetails"],
+    queryFn: () => axios.get(`/single-service/${id}`, {}),
   });
 
   // store sub service data
@@ -81,27 +82,26 @@ export const EditSubService = () => {
 
   // update to database
   const handelAddSubServiceDB = () => {
-
-    console.log("ami ")
     const subServiceData = {
-      name: formData.current.subService_name,
-      descripton: formData.current.subService_description,
-      picture: url.current,
-      catagoryId: subService?.catagoryId,
+      image: url.current || subService?.image ,
+      link: formData.current.subService_description || subService?.link,
+      price: formData.current.subService_name || subService?.
+      price,
+      subCatagoryId: subService?.subCatagoryId,
     };
 
     axios
-      .put(`/update-subcategory/${id}`, subServiceData)
+      .put(`/update-service/${id}`, subServiceData)
       .then((response) => {
         if (response?.data?.success) {
           toast.success("Done");
           reset();
           refetch();
           setIsUpdate(false);
-          navigate(`/service/${subService?.catagoryId}`);
+           navigate('/');
         }
       })
-      .catch((err) => console.error(err))
+      .catch((err) => console.log(err))
       .finally(() => {
         setIsUpdate(false);
       });
@@ -113,7 +113,7 @@ export const EditSubService = () => {
 
   return (
     <div className='FormCardBG'>
-      <h5 className='fromTitle'>Edit Sub Service</h5>
+      <h5 className='fromTitle'>Edit Demo</h5>
 
       <div className=''>
         <form onSubmit={handleSubmit(handelAddSubService)}>
@@ -121,12 +121,12 @@ export const EditSubService = () => {
           <label className='form-control w-full'>
             <div className='label'>
               <span className='label-text text-lg font-medium'>
-                Service Name
+               demo price
               </span>
             </div>
             <input
-              type='text'
-              defaultValue={subService?.name}
+              type='number'
+              defaultValue={subService?.price}
               placeholder='Enter Service Name'
               className='input w-full formInputBox focus:outline-none focus:border-blue'
               {...register("subService_name", {
@@ -144,12 +144,12 @@ export const EditSubService = () => {
           <label className='form-control mt-5'>
             <div className='label'>
               <span className='label-text text-lg font-medium'>
-                Description
+                Link
               </span>
             </div>
             <textarea
               className='textarea min-h-28 formInputBox focus:outline-none focus:border-blue'
-              defaultValue={subService?.descripton}
+              defaultValue={subService?.link}
               placeholder='Enter Service Description'
               {...register("subService_description", {
                 required: "Must Need Sub-Service Description",
@@ -166,7 +166,9 @@ export const EditSubService = () => {
               <span className='label-text text-lg font-medium'>Icon</span>
             </div>
             <div className='m-5'>
-              <img src={subService?.picture} alt='' />
+              <img src={subService?.
+image
+} alt='' />
             </div>
             <input
               id='file-upload'

@@ -12,7 +12,7 @@ export const DemoSection = () => {
   const [page, setPage] = useState(1);    // current page
  const lastIndex= Math.ceil(count  / 10)
 
- console.log(lastIndex)
+
   // Fetch data using useQuery (React Query)
   const { isLoading, data, refetch } = useQuery({
     queryKey: ["allServices", page], // Include 'page' in queryKey to refetch when it changes

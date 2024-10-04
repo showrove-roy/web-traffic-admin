@@ -33,8 +33,8 @@ export const AddDemo = () => {
         return <Loading />;
       }
     
-      let services = data.data.data;
-      console.log(services,"services")
+      let services = data?.data?.data;
+    
 
      
 
@@ -46,7 +46,7 @@ export const AddDemo = () => {
     // setIsUpdate(true);
     formData.current = data;
 
-    console.log(formData.current,"formData.current")
+    
     saveImage();
   };
 
@@ -82,7 +82,7 @@ export const AddDemo = () => {
       link: formData.current.service_description,
       image: url.current,
       price:11,
-subCatagoryId:parseInt(formData.current.Service)
+       subCatagoryId:parseInt(formData.current.Service)
 
     };
 
@@ -117,14 +117,7 @@ subCatagoryId:parseInt(formData.current.Service)
                 
               </span>
             </div>
-            {/* <input
-              type='text'
-              placeholder='Enter Service Name'
-              className='input w-full formInputBox focus:outline-none focus:border-blue'
-              {...register("service_name", {
-                required: "Must Need Service Name",
-              })}
-            /> */}
+           
               <div className="space-y-1 text-sm w-full">
             <label htmlFor="Service" className="block dark:text-gray-400">
               Select Service
@@ -168,7 +161,7 @@ subCatagoryId:parseInt(formData.current.Service)
             <textarea
               className='textarea min-h-28 formInputBox focus:outline-none focus:border-blue'
               placeholder='Enter Service Description'
-              {...register("link", {
+              {...register("service_description", {
                 required: "Must Need Service Description",
               })}></textarea>
             {errors.service_description && (
